@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <img src="https://github.com/KongNontawatDev/Black-Mourning-Ribbon/blob/2150640c0e623c7fbcca07024287b597f7999a84/ribbon_top_left.png?raw=true" 
+     alt="Black mourning ribbon for websites, top left corner, ริบบิ้นไว้ทุกข์สีดำ มุมบนซ้าย สำหรับแสดงความอาลัยบนเว็บไซต์" 
+     style="position:fixed; top:0; left:0; width:80px; opacity:0.9; z-index:9999; pointer-events:none;">
 
     <nav>
         <div class="logo">Yuttapon.J</div>
@@ -27,11 +30,7 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
-        <video autoplay loop muted poster="IMG_4920.JPG" id="background-video">
-            <source src="css/vdo/digital.mp4" type="video/mp4">
-                <!-- เพิ่มไฟล์วิดีโอฟอร์แมตอื่นได้ -->
-        </video>
+    <section id="home" class="hero">    
         <div class="hero-content hidden slide-left">
             <div class="holographic-container">
                 <div class="holographic-card">                 
@@ -46,7 +45,7 @@
             <h1>สวัสดีครับ <br><span class="highlight">ผม ยุทธพล จิตตสม</span></h1>
             <p><span class="highlight-sub">ผู้สอบตำแหน่ง เจ้าพนักงานคอมพิวเตอร์</span></p>
             
-            <a href="#contact" class="btn-primary">ติดต่อฉัน</a>
+            <a href="#contact" class="btn-primary">ช่องทางการติดต่อ</a>
         </div>
         <div class="hero-image hidden slide-right">
             <div class="profile-frame">
@@ -167,178 +166,216 @@
     </section>
 
     <section id="portfolio">
-        <div class="container">
-            <h2 class="hidden fade-up">ผลงานที่โดดเด่น</h2>
-            <div class="slider-container">
-            <h3 class="hidden fade-up">การผ่านการอบรม</h3>
-        <div class="slider-container">
-            <div class="slider-track" id="sliderTrack">
-                <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (1).jpg" alt="Image 1">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - Basic Cybersecurity Lab (ความรู้ทั่วไปของ Cybersecurity)</h3>
-                        <p>โดย สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
-                    </div>
-                    </div>
-                </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (2).jpg" alt="Image 2">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - เทคโนโลยีสารสนเทศในยุคดิจิทัล | Information Technology in Digital Era </h3>
-                        <p>โดย มหาวิทยาลัยวลัยลักษณ์</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (3).jpg" alt="Image 3">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - ระบบเครือข่ายคอมพิวเตอร์ขั้นพื้นฐาน | Network Literacy </h3>
-                        <p>โดย มหาวิทยาลัยเชียงใหม่</p>
-                    </div>
-                </div>
-            </div>
-             <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (4).jpg" alt="Image 4">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - สู่การเป็นนักพัฒนาเว็บ: การสร้างหน้าเว็บเบื้องต้นด้วย HTML และ CSS | Creating a Basic Web Page with HTML and CSS</h3>
-                        <p> โดย จุฬาลงกรณ์มหาวิทยาลัย</p>
-                    </div>
-                </div>
-            </div>
-             <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (5).jpg" alt="Image 5">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตร Microsoft 365 Copilot </h3>
-                        <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
+        
+                <h2 class="hidden fade-up">ผลงานที่โดดเด่น</h2>
+                <h3 class="hidden fade-up">การผ่านการอบรม</h3>
+        <div class="slider-wrapper hidden slide-left">
+        <div class="slider-track" id="track">
+            
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (1).jpg" alt="Image 1">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - Basic Cybersecurity Lab (ความรู้ทั่วไปของ Cybersecurity)</h3>
+                            <p>โดย สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (6).jpg" alt="Image 6">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับพื้นฐาน </h3>
-                        <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (7).jpg" alt="Image 7">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตร Microsoft AI Skills For All</h3>
-                        <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (2).jpg" alt="Image 2">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - เทคโนโลยีสารสนเทศในยุคดิจิทัล | Information Technology in Digital Era </h3>
+                            <p>โดย มหาวิทยาลัยวลัยลักษณ์</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (8).jpg" alt="Image 8">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญ</h3>
-                        <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
+
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (3).jpg" alt="Image 3">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - ระบบเครือข่ายคอมพิวเตอร์ขั้นพื้นฐาน | Network Literacy </h3>
+                            <p>โดย มหาวิทยาลัยเชียงใหม่</p>
+                        </div>
                     </div>
                 </div>
-            </div>   
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (12).jpg" alt="Image 11">
+            </div>
+
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (4).jpg" alt="Image 4">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - สู่การเป็นนักพัฒนาเว็บ: การสร้างหน้าเว็บเบื้องต้นด้วย HTML และ CSS | Creating a Basic Web Page with HTML and CSS</h3>
+                            <p> โดย จุฬาลงกรณ์มหาวิทยาลัย</p>
+                        </div>
                     </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรแอพพลิเคชั่นที่เกี่ยวข้องกับการดำเนินชีวิตประจำวัน</h3>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (5).jpg" alt="Image 5">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตร Microsoft 365 Copilot </h3>
+                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (6).jpg" alt="Image 6">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับพื้นฐาน </h3>
+                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (7).jpg" alt="Image 7">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตร Microsoft AI Skills For All</h3>
+                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (8).jpg" alt="Image 8">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br> - หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญ</h3>
+                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (12).jpg" alt="Image 9">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรแอพพลิเคชั่นที่เกี่ยวข้องกับการดำเนินชีวิตประจำวัน</h3>
                         <p>โดย ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอบางบาล</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (15).jpg" alt="Image 14">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรทักษะการเรียนรู้ภาษาอังกฤษตามมาตรฐาน CEFR</h3>
-                        <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card2" onclick="flipCard(this)">
-                <div class="card2-inner">
-                    <div class="card2-front">
-                        <img src="img/cert/Certificate (16).jpg" alt="Image 15">
-                    </div>
-                    <div class="card2-back">
-                        <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรการพัฒนาสมรรถณะภาษาอังกฤษ</h3>
-                        <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (15).jpg" alt="Image 10">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรทักษะการเรียนรู้ภาษาอังกฤษตามมาตรฐาน CEFR</h3>
+                            <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>         
+            <div class="slide-item">
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="img/cert/Certificate (16).jpg" alt="Image 4">
+                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3>ประกาศนียบัตรผู้ผ่านการอบรม<br>- หลักสูตรการพัฒนาสมรรถณะภาษาอังกฤษ</h3>
+                            <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <br><br><br><br><br>
-
-        <div class="container">
-            <h3 class="hidden fade-up">การมีส่วนร่วมกิจกรรม</h3>
+        </div>
+    
+        
+    <br><br><br><br><br>   
             
-    </div>
+        <h3 class="hidden fade-up">การมีส่วนร่วมกิจกรรม</h3>
+        <div class="slider-container hidden slide-right">
+        <div class="slider-wrapper2">
+            <div class="slide2">
+                <img src="img/cert/Certificate (10).jpg" alt="Mountain View">
+                <div class="caption">รักษ์น้ำรักป่า</div>
+            </div>
+            <div class="slide2">
+                <img src="img/cert/Certificate (11).jpg" alt="Nature">
+                <div class="caption">เทคโนโลยี</div>
+            </div>
+            <div class="slide2">
+                <img src="img/cert/Certificate (13).jpg" alt="Ocean">
+                <div class="caption">บิดาแห่งฝนหลวง</div>
+            </div>
+            <div class="slide2">
+                <img src="img/cert/Certificate (14).jpg" alt="Ocean">
+                <div class="caption">วันวชิราวุธ</div>
+            </div>
             
         </div>
 
-    <div class="slideshow-container hidden fade-up">
+        <button class="prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next-btn" onclick="moveSlide(1)">&#10095;</button>
 
-        <div class="mySlides fade">
-            <div class="numbertext">1 / 3</div>
-            <img src="img/cert/Certificate (10).jpg" style="width:100%">
+        <div class="dots-container">
+            <span class="dot2" onclick="currentSlide(0)"></span>
+            <span class="dot2" onclick="currentSlide(1)"></span>
+            <span class="dot2" onclick="currentSlide(2)"></span>
+            <span class="dot2" onclick="currentSlide(2)"></span>
         </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">2 / 3</div>
-            <img src="img/cert/Certificate (11).jpg" style="width:100%">
         </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="img/cert/Certificate (13).jpg" style="width:100%">
-        </div>
-
-        <div class="mySlides fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="img/cert/Certificate (14).jpg" style="width:100%">
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    </div>
+        
+                
 
     </section>
 
     <section id="contact">
         <div class="container">
-            <h2 class="hidden fade-up">ติดต่อฉัน</h2>
+            <h2 class="hidden fade-up">ช่องทางการติดต่อและแสดงความคิดเห็น</h2>
             <div class="contact-box glass hidden fade-up">
                 <div class="contact-info">
                     <h3>ช่องทางการติดต่อ</h3>
