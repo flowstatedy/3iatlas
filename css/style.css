@@ -18,9 +18,11 @@
 
 body {
     font-family: 'Kanit', sans-serif;
+    justify-content: center;
+    align-items: center;
     background-color: var(--bg-color);
     /* เพิ่ม Texture จางๆ ให้พื้นหลังดูมีมิติ */
-    background-image: linear-gradient(120deg, #E8F5E9 0%, #6da033 100%);
+    background-image: linear-gradient(120deg, #E8F5E9 0%, #5af77c 100%);
     color: var(--text-color);
     overflow-x: hidden;
 }
@@ -99,7 +101,7 @@ h2::after {
     border-radius: 2px;
 }
 
-.highlight { color: #77ff80; }
+.highlight { color: #099721; }
 .highlight-sub { color: #2E7D32;}
 .container { width: 100%; max-width: 1200px; margin: 0 auto; }
 
@@ -325,125 +327,238 @@ h2::after {
     transform: translate(0) scale(1);
 }
 
-/* ตั้งค่าพื้นฐาน */
+/* box slide */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* --- ส่วนของ Slider (รางเลื่อน) --- */
-.slider-container {
+.slider-wrapper {
     width: 100%;
-    overflow-x: auto; /* ให้เลื่อนแนวนอนได้ */
-    overflow-y: hidden;
-    padding: 20px 0;
+    height: 400px;
+    overflow: hidden; /* ซ่อนส่วนเกิน */
     position: relative;
-    cursor: grab; /* เมาส์เป็นรูปมือจับ */
-    
-    /* ซ่อน Scrollbar (เพื่อให้สวยงามและเหมือน App) */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    
-    /* ป้องกันการเลือกข้อความเวลาลาก */
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/* ซ่อน Scrollbar สำหรับ Chrome, Safari, Opera */
-.slider-container::-webkit-scrollbar {
-    display: none;
-}
-
-.slider-container.active {
-    cursor: grabbing; /* เปลี่ยนรูปเมาส์ตอนกำมือ */
-    cursor: -webkit-grabbing;
+    /* ใส่เงาเล็กน้อยเพื่อให้ดูมีมิติ */
+    box-shadow: inset 0 0 50px rgba(7, 105, 20, 0.5);
 }
 
 .slider-track {
     display: flex;
-    width: max-content; /* ให้ความกว้างยืดตามจำนวนการ์ด */
-    /* ลบ animation ออก */
-    pointer-events: none; /* ให้ Event ทะลุไปที่ Container แทน (จัดการโดย JS) */
+    height: 100%;
+    align-items: center;
+    cursor: grab;
+    width: max-content; /* ให้กว้างตามเนื้อหา */
+    will-change: transform; /* บอก Browser ให้เตรียม render ส่วนนี้ไว้ */
 }
 
-/* ให้ pointer event กลับมาทำงานที่ตัวการ์ด เพื่อให้กด Flip ได้ */
-.slider-track > * {
-    pointer-events: auto;
+.slider-track:active {
+    cursor: grabbing;
 }
 
-/* --- ส่วนของ Flip Card (การ์ดพลิก) --- */
-.card2 {
-    width: 350px;
-    height: 250px;
-    margin: 0 10px;
-    perspective: 1000px;
-    cursor: pointer;
+/* --- Slide Styling --- */
+.slide-item {
+    width: 450px;
+    height: 310px;
+    margin: 0 15px; /* ระยะห่างระหว่างการ์ด */
+    perspective: 1000px; /* จำเป็นสำหรับ 3D Flip */
+    user-select: none; /* ห้ามลากคลุมดำตัวหนังสือ */
     flex-shrink: 0;
-    
-    /* ป้องกันการลากรูปภาพติดออกมา (Ghost image) */
-    -webkit-user-drag: none;
 }
 
-.card2-inner {
-    position: relative;
+/* --- Flip Card Logic --- */
+.flip-card {
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
+    position: relative;
     transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* คลาสที่จะถูกเติมด้วย JS เมื่อคลิก */
-.card2.is-flipped .card2-inner {
+/* คลาสนี้จะถูก JS สั่งใส่/ถอด */
+.flip-card.is-flipped {
     transform: rotateY(180deg);
 }
 
-.card2-front, .card2-back {
+.flip-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.flip-card-front, .flip-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     overflow: hidden;
 }
 
-/* ด้านหน้า (รูปภาพ) */
-.card2-front {
-    background-color: #fff;
+.flip-card-front {
+    background: #fff;
 }
 
-.card2-front img {
+.flip-card-front img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none; /* ป้องกันการลากไฟล์รูป */
+    pointer-events: none; /* ป้องกันการลากรูปภาพติดเมาส์ */
 }
 
-/* ด้านหลัง (ข้อความ) */
-.card2-back {
-    background: linear-gradient(135deg, #01b31f 0%, #02860d 100%);
+.hint {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    padding: 5px;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.flip-card-back {
+    background: linear-gradient(135deg, #6bff8b, #38c740);
     color: white;
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 20px;
 }
 
-.card2-back h3 {
-    color: white;
-    margin-bottom: 10px;
-    font-size: 1rem;
+.flip-card-back h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
 }
 
-.card2-back p {
-    font-size: 0.8rem;
-    line-height: 1rem;
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .slide-item {
+        width: 70vw; /* บนมือถือให้เล็กลงหน่อย */
+        height: 55vh;
+    }
 }
+/* จบ box slide */
+
+/* box slide2 */
+/* คอนเทนเนอร์หลักของสไลด์ */
+.slider-container {
+    position: relative;
+    max-width: 600px; /* ความกว้างสูงสุดบน PC */
+    width: 80%;
+    margin: 50px auto;
+    overflow: hidden; /* ซ่อนส่วนที่ล้นออกมา */
+    border-radius: 5px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    
+}
+
+/* ตัวห่อหุ้มรูปภาพ (Flexbox เพื่อเรียงรูปแนวนอน) */
+.slider-wrapper2 {
+    display: flex;
+    transition: transform 1.5s ease-in-out; /* เอฟเฟกต์การเลื่อน */
+    height: 100%;
+}
+
+/* ตัวสไลด์แต่ละอัน */
+.slide2 {
+    min-width: 100%;
+    position: relative;
+}
+
+.slide2 img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* คำอธิบายภาพ (Caption) */
+.caption {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* เอฟเฟกต์ค่อยๆ ปรากฏ */
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* ปุ่มถัดไป/ก่อนหน้า */
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(196, 178, 178, 0.3);
+    border: none;
+    color: rgb(151, 135, 135);
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+.prev-btn:hover, .next-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* จุด (Dots) ด้านล่าง */
+.dots-container {
+    text-align: center;
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+}
+
+.dot2 {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.dot2.active, .dot2:hover {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+/* Media Query สำหรับมือถือ */
+@media (max-width: 600px) {
+    .caption {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        bottom: 40px; /* ขยับขึ้นหลบ Dots */
+    }
+    
+    .prev-btn, .next-btn {
+        padding: 5px 10px;
+        font-size: 1.5rem;
+    }
+}
+/* จบ box slide2 */
 
 
 @keyframes morph {
@@ -460,70 +575,4 @@ h2::after {
     .contact-box { flex-direction: column; }
     .nav-links { display: none; } /* เบื้องต้นซ่อนเมนูบนมือถือ */
     .hamburger { display: block; font-size: 1.5rem; }
-}
-
-/* คอนเทนเนอร์รูปภาพ */
-.slideshow-container {
-  width: 800px;
-  height: 550px;
-  position: relative;
-  margin: auto;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  border-radius: 10px;
-  overflow: hidden; /* ตัดส่วนเกินที่ล้นออกมา */
-  background-color: #fff;
-}
-
-/* ซ่อนรูปภาพทั้งหมดไว้ก่อน (จะเปิดด้วย JS) */
-.mySlides {
-  display: none;
-}
-
-/* ปุ่ม Previous และ Next */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 100px;
-  transition: 0.6s ease;
-  border-radius: 0 10px 10px 0;
-  user-select: none;
-  background-color: rgba(0,0,0,0.3); /* พื้นหลังโปร่งใส */
-}
-
-/* จัดตำแหน่งปุ่ม Next ไว้อีกฝั่ง */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* เปลี่ยนสีพื้นหลังปุ่มเมื่อเอาเมาส์ไปชี้ */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-
-/* เลขหน้า (1/3) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* เอฟเฟกต์ Fade (ภาพค่อยๆ ปรากฏ) */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
 }
