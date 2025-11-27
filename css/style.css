@@ -442,7 +442,7 @@ h2::after {
 /* Mobile Responsive */
 @media (max-width: 600px) {
     .slide-item {
-        width: 70vw; /* บนมือถือให้เล็กลงหน่อย */
+        width: 50vw; /* บนมือถือให้เล็กลงหน่อย */
         height: 55vh;
     }
 }
@@ -576,3 +576,4 @@ h2::after {
     .nav-links { display: none; } /* เบื้องต้นซ่อนเมนูบนมือถือ */
     .hamburger { display: block; font-size: 1.5rem; }
 }
+
