@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
         });
+        
     });
-});
-    function flipCard(element) {
+        function flipCard(element) {
     // สลับคลาส 'is-flipped' ใส่เข้าไปใน element ที่ถูกคลิก
     element.classList.toggle('is-flipped');
     
@@ -51,7 +51,6 @@ function flipCard(element) {
 }
 
 // --- ส่วนที่เพิ่มใหม่: Auto Infinite Loop ---
-document.addEventListener("DOMContentLoaded", function() {
     const track = document.getElementById('sliderTrack');
     const originalCards = Array.from(track.children);
     
@@ -127,3 +126,4 @@ form.addEventListener('submit', e => {
   .then(response => alert("Thank you! Form is submitted" ))
   .then(() => { window.location.reload(); })
 })
+
