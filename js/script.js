@@ -33,50 +33,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 behavior: 'smooth'
             });
         });
-        
     });
-        function flipCard(element) {
-    // สลับคลาส 'is-flipped' ใส่เข้าไปใน element ที่ถูกคลิก
-    element.classList.toggle('is-flipped');
+});
+
+const slider = document.querySelector('.slider-container');
+let isDown = false;
+let startX;
+let scrollLeft;
+let isDragging = false; // ตัวแปรเช็คว่ากำลังลากอยู่ไหม
+
+// 1. ส่วนของการลาก (Drag to Scroll)
+slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    isDragging = false; // รีเซ็ตสถานะการลาก
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+});
+
+slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+    // หน่วงเวลาเล็กน้อยเพื่อเคลียร์สถานะการลาก (ป้องกันการ Flip ผิดจังหวะ)
+    setTimeout(() => { isDragging = false; }, 10); 
+});
+
+slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return; // ถ้าไม่ได้คลิกค้างไว้ ก็ไม่ต้องทำอะไร
+    e.preventDefault();
     
-    // (เสริม) ถ้าต้องการให้ Debug ดูว่าคลิกทำงานไหม ให้เปิดบรรทัดล่างนี้
-    // console.log("Card flipped!"); 
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // *2 คือความเร็วในการเลื่อน
+    
+    // เช็คว่าเมาส์ขยับไปเยอะพอที่จะเรียกว่า "ลาก" หรือยัง (กันมือสั่น)
+    if (Math.abs(walk) > 5) { 
+        isDragging = true; 
     }
     
-    /* --- script.js --- */
-
-// ฟังก์ชันเดิมสำหรับ Flip Card
-function flipCard(element) {
-    element.classList.toggle('is-flipped');
-}
-
-// --- ส่วนที่เพิ่มใหม่: Auto Infinite Loop ---
-    const track = document.getElementById('sliderTrack');
-    const originalCards = Array.from(track.children);
-    
-    // ตั้งค่าความกว้างของการ์ด 1 ใบ (กว้าง 230 + margin ซ้ายขวา 20 = 250px)
-    // ถ้าคุณแก้ขนาดใน CSS อย่าลืมมาแก้ตรงนี้ด้วยครับ
-    const cardWidthWithMargin = 250; 
-
-    // คำนวณความกว้างรวมของชุดข้อมูลจริง
-    const singleSetWidth = originalCards.length * cardWidthWithMargin;
-
-    // 1. สั่ง Clone การ์ดทุกใบ แล้วเอาไปต่อท้าย (เพื่อให้ Loop เนียน)
-    originalCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        // cloneNode(true) จะก๊อปปี้ onclick มาด้วย ดังนั้นคลิก Flip ได้เหมือนตัวจริง
-        track.appendChild(clone);
-    });
-
-    // 2. คำนวณความกว้างของ Track ทั้งหมด (ชุดจริง + ชุด Clone)
-    const totalTrackWidth = singleSetWidth * 2;
-
-    // 3. ส่งค่าตัวแปรไปให้ CSS ใช้งาน
-    // --slider-total-width: ความกว้างรางทั้งหมด
-    document.documentElement.style.setProperty('--slider-total-width', `${totalTrackWidth}px`);
-    // --slider-scroll-distance: ระยะที่จะเลื่อน (เท่ากับความกว้างชุดจริง 1 ชุด แล้ววนกลับ)
-    document.documentElement.style.setProperty('--slider-scroll-distance', `-${singleSetWidth}px`);
+    slider.scrollLeft = scrollLeft - walk;
 });
+
+// 2. ส่วนของการ Flip Card (และป้องกันไม่ให้ Flip ตอนลาก)
+const cards = document.querySelectorAll('.card2');
+
+cards.forEach(card => {
+    card.addEventListener('click', (e) => {
+        // ถ้าสถานะคือ "กำลังลาก" หรือเพิ่งลากเสร็จ ให้หยุดการทำงาน (ไม่ Flip)
+        if (isDragging) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        
+        // ถ้าเป็นการคลิกปกติ ให้สลับคลาส is-flipped
+        card.classList.toggle('is-flipped');
+    });
+});
+
 
 // กำหนดค่าเริ่มต้น ให้แสดงรูปแรก (Index 1)
 let slideIndex = 1;
@@ -126,4 +144,3 @@ form.addEventListener('submit', e => {
   .then(response => alert("Thank you! Form is submitted" ))
   .then(() => { window.location.reload(); })
 })
-
