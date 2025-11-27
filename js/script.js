@@ -36,99 +36,211 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-const slider = document.querySelector('.slider-container');
-let isDown = false;
-let startX;
-let scrollLeft;
-let isDragging = false; // ตัวแปรเช็คว่ากำลังลากอยู่ไหม
+// box slide
+const track = document.getElementById('track');
+let items = Array.from(document.querySelectorAll('.slide-item'));
 
-// 1. ส่วนของการลาก (Drag to Scroll)
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    isDragging = false; // รีเซ็ตสถานะการลาก
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
+// 1. Clone Items เพื่อทำ Infinite Loop
+// เราจะ Clone items ชุดเดิมมาต่อท้าย เพื่อให้พื้นที่กว้างพอสำหรับการวน
+items.forEach(item => {
+    const clone = item.cloneNode(true);
+    track.appendChild(clone);
 });
 
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
+// อัปเดตรายการ items ทั้งหมด (รวมตัว clone)
+let allItems = document.querySelectorAll('.slide-item');
+
+// คำนวณความกว้างของ Slide ชุดแรก (Original Set Width)
+// เพื่อใช้คำนวณจุดตัด Infinite Loop
+const singleSetWidth = items.length * (items[0].offsetWidth + 30); // 30 คือ margin left+right (15+15)
+// หมายเหตุ: ถ้าเปลี่ยน margin ใน css ต้องแก้เลข 30 ตรงนี้ด้วย หรือใช้ getComputedStyle ก็ได้
+
+// ตัวแปรสำหรับ Drag Logic
+let isDragging = false;
+let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let animationID;
+let startX = 0;
+let isClick = true; // เอาไว้เช็คว่าคลิกหรือลาก
+
+// --- Event Listeners ---
+
+// Mouse Events
+track.addEventListener('mousedown', dragStart);
+track.addEventListener('mouseup', dragEnd);
+track.addEventListener('mouseleave', () => {
+    if(isDragging) dragEnd();
+});
+track.addEventListener('mousemove', dragAction);
+
+// Touch Events
+track.addEventListener('touchstart', dragStart);
+track.addEventListener('touchend', dragEnd);
+track.addEventListener('touchmove', dragAction);
+
+// Prevent Context Menu (คลิกขวา)
+window.oncontextmenu = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+}
+
+// --- Flip Card Logic (Event Delegation) ---
+// ใช้ Event Delegation ที่ track เพื่อจัดการ Slide ทั้งหมดรวมถึงตัว Clone
+track.addEventListener('click', function(e) {
+    // ถ้าเป็นการลาก (isClick == false) เราจะไม่ทำอะไร
+    if (!isClick) return;
+
+    // หา element ที่เป็น card จากจุดที่คลิก
+    const card = e.target.closest('.flip-card');
+    if (card) {
+        card.classList.toggle('is-flipped');
+    }
 });
 
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-    // หน่วงเวลาเล็กน้อยเพื่อเคลียร์สถานะการลาก (ป้องกันการ Flip ผิดจังหวะ)
-    setTimeout(() => { isDragging = false; }, 10); 
-});
 
-slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return; // ถ้าไม่ได้คลิกค้างไว้ ก็ไม่ต้องทำอะไร
-    e.preventDefault();
+// --- Functions ---
+
+function dragStart(event) {
+    isDragging = true;
+    isClick = true; // สมมติไว้ก่อนว่าเป็นคลิก
+    startX = getPositionX(event);
+    startPos = getPositionX(event);
     
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2; // *2 คือความเร็วในการเลื่อน
+    // หยุด animation loop เก่า (ถ้ามี)
+    cancelAnimationFrame(animationID);
     
-    // เช็คว่าเมาส์ขยับไปเยอะพอที่จะเรียกว่า "ลาก" หรือยัง (กันมือสั่น)
-    if (Math.abs(walk) > 5) { 
-        isDragging = true; 
+    track.style.cursor = 'grabbing';
+}
+
+function dragAction(event) {
+    if (!isDragging) return;
+
+    const currentPosition = getPositionX(event);
+    const diff = currentPosition - startX;
+
+    // ถ้าขยับเกิน 5 pixels ให้ถือว่าเป็นการ "ลาก" ไม่ใช่ "คลิก"
+    if (Math.abs(currentPosition - startPos) > 5) {
+        isClick = false;
+    }
+
+    currentTranslate = prevTranslate + diff;
+    
+    // เรียกฟังก์ชันวาดผล
+    requestAnimationFrame(updateSliderPosition);
+}
+
+function dragEnd() {
+    isDragging = false;
+    track.style.cursor = 'grab';
+    
+    // บันทึกตำแหน่งล่าสุดไว้ เพื่อลากต่อจากจุดเดิม (Free Scroll ไม่เด้งกลับ)
+    prevTranslate = currentTranslate;
+    
+    // ตรวจสอบขอบเขต Infinite Loop ทันทีที่ปล่อยมือ
+    checkInfiniteBoundary();
+}
+
+function getPositionX(event) {
+    return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+}
+
+function updateSliderPosition() {
+    track.style.transform = `translateX(${currentTranslate}px)`;
+    // เช็ค boundary ขณะลากด้วยเพื่อให้เนียนที่สุด
+    checkInfiniteBoundary(); 
+}
+
+// --- Infinite Loop Core Logic ---
+function checkInfiniteBoundary() {
+    // ถ้าเลื่อนไปทางซ้าย จนเกินความกว้างของชุดแรก
+    if (currentTranslate <= -singleSetWidth) {
+        // วาร์ปกลับมาที่จุดเริ่มต้น (บวกค่าความกว้างกลับเข้าไป)
+        currentTranslate += singleSetWidth;
+        prevTranslate = currentTranslate;
+        track.style.transform = `translateX(${currentTranslate}px)`;
     }
     
-    slider.scrollLeft = scrollLeft - walk;
-});
-
-// 2. ส่วนของการ Flip Card (และป้องกันไม่ให้ Flip ตอนลาก)
-const cards = document.querySelectorAll('.card2');
-
-cards.forEach(card => {
-    card.addEventListener('click', (e) => {
-        // ถ้าสถานะคือ "กำลังลาก" หรือเพิ่งลากเสร็จ ให้หยุดการทำงาน (ไม่ Flip)
-        if (isDragging) {
-            e.preventDefault();
-            e.stopPropagation();
-            return;
-        }
-        
-        // ถ้าเป็นการคลิกปกติ ให้สลับคลาส is-flipped
-        card.classList.toggle('is-flipped');
-    });
-});
-
-
-// กำหนดค่าเริ่มต้น ให้แสดงรูปแรก (Index 1)
-let slideIndex = 1;
-showSlides(slideIndex);
-
-// ฟังก์ชันเมื่อกดปุ่ม Next/Prev
-// n = 1 คือถัดไป, n = -1 คือย้อนกลับ
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+    // ถ้าเลื่อนไปทางขวา จนเกินจุดเริ่มต้น (เป็นบวก)
+    if (currentTranslate > 0) {
+        // วาร์ปไปที่ชุด Clone ด้านหลัง (ลบค่าความกว้างออก)
+        currentTranslate -= singleSetWidth;
+        prevTranslate = currentTranslate;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
 }
 
-// ฟังก์ชันแสดงผลรูปภาพ
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  
-  // ตรวจสอบเงื่อนไข: ถ้ากดเกินจำนวนรูป ให้กลับไปรูปแรก
-  if (n > slides.length) {
-    slideIndex = 1;
-  }
-  
-  // ตรวจสอบเงื่อนไข: ถ้ากดย้อนต่ำกว่า 1 ให้ไปรูปสุดท้าย
-  if (n < 1) {
-    slideIndex = slides.length;
-  }
-  
-  // ซ่อนรูปภาพทั้งหมดก่อน
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  
-  // แสดงเฉพาะรูปภาพปัจจุบัน (slideIndex - 1 เพราะ array เริ่มที่ 0)
-  slides[slideIndex - 1].style.display = "block";  
+// Handle Resize: คำนวณความกว้างใหม่ถ้าย่อขยายจอ
+window.addEventListener('resize', () => {
+    // รีเฟรชหน้าเพื่อคำนวณขนาดใหม่ (วิธีง่ายสุดสำหรับ Infinite Scroll แบบ Manual)
+    // หรือจะเขียน Logic คำนวณ singleSetWidth ใหม่ตรงนี้ก็ได้
+});
+// end
+
+// box slide2
+let slideIndex = 0;
+const slides = document.querySelectorAll('.slide2');
+const dots = document.querySelectorAll('.dot2');
+const wrapper = document.querySelector('.slider-wrapper2');
+const totalSlides = slides.length;
+let autoSlideInterval;
+
+// ฟังก์ชันแสดงสไลด์ตาม index
+function showSlide(index) {
+    // ตรวจสอบขอบเขตของ index (Loop กลับไปหน้าแรกหรือหน้าสุดท้าย)
+    if (index >= totalSlides) {
+        slideIndex = 0;
+    } else if (index < 0) {
+        slideIndex = totalSlides - 1;
+    } else {
+        slideIndex = index;
+    }
+
+    // คำนวณระยะการเลื่อน (Transform TranslateX)
+    const offset = -slideIndex * 100; 
+    wrapper.style.transform = `translateX(${offset}%)`;
+
+    // อัปเดตสถานะของจุด (Dots)
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[slideIndex].classList.add('active');
 }
+
+// ฟังก์ชันสำหรับปุ่ม Next/Prev
+function moveSlide(step) {
+    showSlide(slideIndex + step);
+    resetAutoSlide(); // รีเซ็ตเวลาการเล่นอัตโนมัติเมื่อกดปุ่ม
+}
+
+// ฟังก์ชันสำหรับกดที่จุด (Dots)
+function currentSlide(index) {
+    showSlide(index);
+    resetAutoSlide();
+}
+
+// ฟังก์ชันเล่นอัตโนมัติ
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        moveSlide(1);
+    }, 4000); // เลื่อนทุก 4 วินาที
+}
+
+// ฟังก์ชันรีเซ็ตเวลา (เมื่อมีการกดปุ่ม จะเริ่มนับเวลาใหม่ ไม่ให้เลื่อนซ้อนกัน)
+function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+}
+
+// เริ่มต้นการทำงาน
+showSlide(slideIndex);
+startAutoSlide();
+
+// (Optional) หยุดเล่นเมื่อเอาเมาส์ไปชี้ที่ Slider
+const container = document.querySelector('.slider-container');
+container.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+container.addEventListener('mouseleave', startAutoSlide);
+// end
+
 
 // สคริป API
 
