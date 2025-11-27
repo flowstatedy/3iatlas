@@ -335,27 +335,41 @@ h2::after {
 /* --- ส่วนของ Slider (รางเลื่อน) --- */
 .slider-container {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto; /* ให้เลื่อนแนวนอนได้ */
+    overflow-y: hidden;
     padding: 20px 0;
     position: relative;
+    cursor: grab; /* เมาส์เป็นรูปมือจับ */
+    
+    /* ซ่อน Scrollbar (เพื่อให้สวยงามและเหมือน App) */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    /* ป้องกันการเลือกข้อความเวลาลาก */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ซ่อน Scrollbar สำหรับ Chrome, Safari, Opera */
+.slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+.slider-container.active {
+    cursor: grabbing; /* เปลี่ยนรูปเมาส์ตอนกำมือ */
+    cursor: -webkit-grabbing;
 }
 
 .slider-track {
     display: flex;
-    /* ใช้ตัวแปรความกว้างที่คำนวณจาก JS */
-    width: var(--slider-total-width); 
-    animation: scroll 25s linear infinite;
+    width: max-content; /* ให้ความกว้างยืดตามจำนวนการ์ด */
+    /* ลบ animation ออก */
+    pointer-events: none; /* ให้ Event ทะลุไปที่ Container แทน (จัดการโดย JS) */
 }
 
-/* หยุดการเลื่อนเมื่อเอาเมาส์ไปวาง (Hover) */
-.slider-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    /* เลื่อนไปตามระยะที่คำนวณไว้ (ความกว้างของชุดการ์ดต้นฉบับ) */
-    100% { transform: translateX(var(--slider-scroll-distance)); } 
+/* ให้ pointer event กลับมาทำงานที่ตัวการ์ด เพื่อให้กด Flip ได้ */
+.slider-track > * {
+    pointer-events: auto;
 }
 
 /* --- ส่วนของ Flip Card (การ์ดพลิก) --- */
@@ -366,6 +380,9 @@ h2::after {
     perspective: 1000px;
     cursor: pointer;
     flex-shrink: 0;
+    
+    /* ป้องกันการลากรูปภาพติดออกมา (Ghost image) */
+    -webkit-user-drag: none;
 }
 
 .card2-inner {
@@ -402,6 +419,7 @@ h2::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none; /* ป้องกันการลากไฟล์รูป */
 }
 
 /* ด้านหลัง (ข้อความ) */
