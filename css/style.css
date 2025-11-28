@@ -328,45 +328,52 @@ h2::after {
 }
 
 /* box slide */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 .slider-wrapper {
     width: 100%;
     height: 400px;
-    overflow: hidden; /* ซ่อนส่วนเกิน */
+    
+    /* --- จุดที่แก้ไข 1: เปลี่ยนจาก hidden เป็น auto --- */
+    overflow-x: auto; 
+    overflow-y: hidden; /* ล็อคไม่ให้ขยับแนวตั้ง */
+    
+    /* --- จุดที่แก้ไข 2: เพิ่มแรงเหวี่ยง (Momentum) ให้มือถือ --- */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+
     position: relative;
-    /* ใส่เงาเล็กน้อยเพื่อให้ดูมีมิติ */
     box-shadow: inset 0 0 50px rgba(7, 105, 20, 0.5);
+
+    /* --- จุดที่แก้ไข 3: ซ่อน Scrollbar ไม่ให้รกตา --- */
+    scrollbar-width: none; /* สำหรับ Firefox */
+    -ms-overflow-style: none; /* สำหรับ IE/Edge */
+}
+
+/* ซ่อน Scrollbar สำหรับ Chrome, Safari, Opera */
+.slider-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 .slider-track {
     display: flex;
     height: 100%;
     align-items: center;
-    cursor: grab;
-    width: max-content; /* ให้กว้างตามเนื้อหา */
-    will-change: transform; /* บอก Browser ให้เตรียม render ส่วนนี้ไว้ */
+    /* cursor: grab;  <-- ลบหรือ comment ออกได้ เพราะเราใช้ scroll แบบปกติแล้ว */
+    width: max-content; 
+    
+    /* will-change: transform; <-- อันนี้ถ้าไม่ได้ใช้ JS ขยับ track แล้ว ก็เอาออกได้ครับ */
 }
 
-.slider-track:active {
-    cursor: grabbing;
-}
-
-/* --- Slide Styling --- */
+/* --- Slide Styling (ส่วนนี้เหมือนเดิม) --- */
 .slide-item {
     width: 450px;
     height: 310px;
-    margin: 0 15px; /* ระยะห่างระหว่างการ์ด */
-    perspective: 1000px; /* จำเป็นสำหรับ 3D Flip */
-    user-select: none; /* ห้ามลากคลุมดำตัวหนังสือ */
+    margin: 0 15px; 
+    perspective: 1000px; 
+    user-select: none; 
     flex-shrink: 0;
 }
 
-/* --- Flip Card Logic --- */
+/* --- Flip Card Logic (ส่วนนี้เหมือนเดิม) --- */
 .flip-card {
     width: 100%;
     height: 100%;
@@ -375,7 +382,6 @@ h2::after {
     transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* คลาสนี้จะถูก JS สั่งใส่/ถอด */
 .flip-card.is-flipped {
     transform: rotateY(180deg);
 }
@@ -406,7 +412,7 @@ h2::after {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none; /* ป้องกันการลากรูปภาพติดเมาส์ */
+    pointer-events: none; 
 }
 
 .hint {
@@ -442,7 +448,7 @@ h2::after {
 /* Mobile Responsive */
 @media (max-width: 500px) {
     .slide-item {
-        width: 70vw; /* บนมือถือให้เล็กลงหน่อย */
+        width: 70vw; 
         height: 30vh;
     }
 }
@@ -576,9 +582,3 @@ h2::after {
     .nav-links { display: none; } /* เบื้องต้นซ่อนเมนูบนมือถือ */
     .hamburger { display: block; font-size: 1.5rem; }
 }
-
-
-
-
-
-
