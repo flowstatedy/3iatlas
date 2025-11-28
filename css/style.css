@@ -440,10 +440,10 @@ h2::after {
 }
 
 /* Mobile Responsive */
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .slide-item {
-        width: 60vw; /* บนมือถือให้เล็กลงหน่อย */
-        height: 42vh;
+        width: 42vw; /* บนมือถือให้เล็กลงหน่อย */
+        height: 60vh;
     }
 }
 /* จบ box slide */
@@ -576,5 +576,6 @@ h2::after {
     .nav-links { display: none; } /* เบื้องต้นซ่อนเมนูบนมือถือ */
     .hamburger { display: block; font-size: 1.5rem; }
 }
+
 
 
