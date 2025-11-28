@@ -231,17 +231,38 @@ container.addEventListener('mouseleave', startAutoSlide);
 // end
 
 
-// สคริป API
+// สคริป API Web app
 
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyrrE4Jgflo8rGAtSRKCyP3EaS2EQztQBEFZP4nITCKZuGfc9z3Hudwpu-C3vRXWcmTrg/exec'
+const scriptURL = 'https://script.google.com/macros/s/AKfycbygHEWxNk-7Eo91ZZC5sZTJl06_yZBSa7BUW7b6vn610utUiF4WBk49EVf8dIKK1eQcfA/exec';
+    
+    const form = document.forms['submit-to-google-sheet'];
+    const msg = document.getElementById("msg");
 
-const form = document.forms['contact-form']
+    form.addEventListener('submit', e => {
+        e.preventDefault(); // ป้องกันเว็บรีเฟรช
+        
+        // แสดงข้อความว่ากำลังส่ง (Optional)
+        const btn = form.querySelector('button');
+        const originalBtnText = btn.innerText;
+        btn.innerText = "กำลังส่ง...";
+        btn.disabled = true;
 
-form.addEventListener('submit', e => {
-  
-  e.preventDefault()
-  
-  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-  .then(response => alert("Thank you! Form is submitted" ))
-  .then(() => { window.location.reload(); })
-})
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.style.display = "block"; // แสดงข้อความสำเร็จ
+                form.reset(); // ล้างแบบฟอร์ม
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+                
+                // ซ่อนข้อความแจ้งเตือนหลัง 5 วินาที
+                setTimeout(function(){
+                    msg.style.display = "none";
+                }, 5000);
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
+            });
+    });
