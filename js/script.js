@@ -152,24 +152,6 @@ function updateSliderPosition() {
     checkInfiniteBoundary(); 
 }
 
-// --- Infinite Loop Core Logic ---
-function checkInfiniteBoundary() {
-    // ถ้าเลื่อนไปทางซ้าย จนเกินความกว้างของชุดแรก
-    if (currentTranslate <= -singleSetWidth) {
-        // วาร์ปกลับมาที่จุดเริ่มต้น (บวกค่าความกว้างกลับเข้าไป)
-        currentTranslate += singleSetWidth;
-        prevTranslate = currentTranslate;
-        track.style.transform = `translateX(${currentTranslate}px)`;
-    }
-    
-    // ถ้าเลื่อนไปทางขวา จนเกินจุดเริ่มต้น (เป็นบวก)
-    if (currentTranslate > 0) {
-        // วาร์ปไปที่ชุด Clone ด้านหลัง (ลบค่าความกว้างออก)
-        currentTranslate -= singleSetWidth;
-        prevTranslate = currentTranslate;
-        track.style.transform = `translateX(${currentTranslate}px)`;
-    }
-}
 
 // Handle Resize: คำนวณความกว้างใหม่ถ้าย่อขยายจอ
 window.addEventListener('resize', () => {
