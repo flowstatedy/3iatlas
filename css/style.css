@@ -88,6 +88,8 @@ h1, h2, h3 {
     margin-bottom: 1rem;
 }
 
+p1 { font-size: 1rem; text-align: center; margin-bottom: 2rem; color: white;}
+
 h1 { font-size: 3.5rem; line-height: 1.2; }
 h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
 h3 { font-size: 1.5rem; text-align: center; margin-bottom: 2rem; }
@@ -579,6 +581,32 @@ h2::after {
     .hero-content { max-width: 100%; }
     .content-grid { grid-template-columns: 1fr; }
     .contact-box { flex-direction: column; }
-    .nav-links { display: none; } /* เบื้องต้นซ่อนเมนูบนมือถือ */
-    .hamburger { display: block; font-size: 1.5rem; }
+    
+    .hamburger { 
+        display: block; 
+        font-size: 1.5rem; 
+        cursor: pointer; /* เพิ่มให้รู้ว่ากดได้ */
+        z-index: 1001; /* ดันปุ่มให้อยู่เหนือเมนู */
+    }
+
+    /* สถานะปกติ: ซ่อนเมนู */
+    .nav-links { 
+        display: none; 
+        position: absolute; /* ลอยตัวเพื่อให้จัดตำแหน่งได้อิสระ */
+        top: 60px; /* ระยะห่างจากด้านบน (ปรับตามความสูง Navbar) */
+        right: 0;
+        background-color: #fff; /* สีพื้นหลังเมนู (จำเป็นต้องใส่) */
+        width: 100%; /* กว้างเต็มจอ */
+        flex-direction: column; /* เรียงลิงก์แนวตั้ง */
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* เงาให้ดูมีมิติ */
+        z-index: 1000;
+    }
+
+    /* สถานะเมื่อกดปุ่ม (Active): แสดงเมนู */
+    /* JavaScript จะเติมคลาส active เข้ามาตรงนี้ */
+    .nav-links.active {
+        display: flex; 
+    }
 }
