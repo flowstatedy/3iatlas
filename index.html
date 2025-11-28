@@ -15,7 +15,7 @@
      style="position:fixed; top:0; left:0; width:80px; opacity:0.9; z-index:9999; pointer-events:none;">
 
     <nav>
-        <div class="logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yuttapol.C</div>
+        <div class="logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yutthapol.C</div>
         <ul class="nav-links">
             <li><a href="#home">หน้าหลัก</a></li>
             <li><a href="#intro">คำนำ</a></li>
@@ -396,11 +396,12 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form method="POST"  action="" name="contact-form">
-                        <input name="ชื่อ" type="text" placeholder="ชื่อ" >
-                        <input name="อีเมล" type="email" placeholder="อีเมล" >
-                        <textarea name="ความคิดเห็น" rows="7" placeholder="ความคิดเห็น" ></textarea>
-                        <button type="submit" value="Submit" class="btn-primary">ส่งความคิดเห็น</button>
+                    <form   form name="submit-to-google-sheet">
+                        <input name="ชื่อ" type="text" placeholder="ชื่อ" required>
+                        <input name="เบอร์โทร" type="tel" placeholder="เบอร์โทร" required>
+                        <textarea name="ความคิดเห็น" rows="7" placeholder="ความคิดเห็น" required></textarea>
+                        <button type="submit" class="btn-primary">ส่งความคิดเห็น</button>
+                        <p id="msg" style="display:none; color: green; margin-top:10px;">ส่งข้อมูลเรียบร้อยแล้ว!</p>
                     </form>
                 </div>
             </div>
