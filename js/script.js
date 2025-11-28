@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        // สลับคลาส active ไปมา (ถ้ามีก็เอาออก ถ้าไม่มีก็ใส่เพิ่ม)
+        navLinks.classList.toggle('active');
+    });
 });
 
 // box slide
