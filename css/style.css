@@ -451,8 +451,8 @@ h2::after {
 /* Mobile Responsive */
 @media (max-width: 600px )  {
     .slide-item {
-        width: 50vw; 
-        height: 11vh;
+        width: 30vw; 
+        height: 8vh;
     }
 }
 /* จบ box slide */
