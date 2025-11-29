@@ -452,7 +452,7 @@ h2::after {
 @media (max-width: 600px )  {
     .slide-item {
         width: 50vw; 
-        height: 11vh;
+        height: 20vh;
     }
 }
 /* จบ box slide */
@@ -611,5 +611,6 @@ h2::after {
         display: flex; 
     }
 }
+
 
 
