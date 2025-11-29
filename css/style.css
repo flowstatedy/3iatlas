@@ -451,8 +451,8 @@ h2::after {
 /* Mobile Responsive */
 @media (max-width: 600px )  {
     .slide-item {
-        width: 40vw; 
-        height: 9vh;
+        width: 50vw; 
+        height: 11vh;
     }
 }
 /* จบ box slide */
@@ -611,4 +611,5 @@ h2::after {
         display: flex; 
     }
 }
+
 
