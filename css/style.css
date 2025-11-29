@@ -93,6 +93,7 @@ p1 { font-size: 1rem; text-align: center; margin-bottom: 2rem; color: white;}
 h1 { font-size: 3.5rem; line-height: 1.2; }
 h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; }
 h3 { font-size: 1.5rem; text-align: center; margin-bottom: 2rem; }
+h4 { font-size: 1rem; text-align: center; margin-top: 0.5rem; color: white;}
 h2::after {
     content: '';
     display: block;
@@ -343,7 +344,7 @@ h2::after {
     scroll-behavior: smooth;
 
     position: relative;
-    box-shadow: inset 0 0 50px rgba(7, 105, 20, 0.5);
+    box-shadow: inset 0 0 70px rgba(0, 46, 7, 0.685);
 
     /* --- จุดที่แก้ไข 3: ซ่อน Scrollbar ไม่ให้รกตา --- */
     scrollbar-width: none; /* สำหรับ Firefox */
@@ -424,7 +425,7 @@ h2::after {
     right: 0;
     text-align: center;
     color: white;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     padding: 5px;
     font-size: 0.9rem;
     pointer-events: none;
@@ -448,10 +449,10 @@ h2::after {
 }
 
 /* Mobile Responsive */
-@media (max-width: 500px) {
+@media (max-width: 300px) {
     .slide-item {
-        width: 70vw; 
-        height: 30vh;
+        width: 60vw; 
+        height: 22vh;
     }
 }
 /* จบ box slide */
@@ -511,7 +512,7 @@ h2::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(196, 178, 178, 0.3);
+    background-color: rgba(165, 184, 170, 0.3);
     border: none;
     color: rgb(151, 135, 135);
     font-size: 2rem;
