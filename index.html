@@ -3,517 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ยุทธพล จิตตสม - Portfolio</title>
-    
+    <title>Portfolio - Yutthaphon Chittasom</title>
+    <link rel="stylesheet" href="Css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <img src="https://github.com/KongNontawatDev/Black-Mourning-Ribbon/blob/2150640c0e623c7fbcca07024287b597f7999a84/ribbon_top_left.png?raw=true" 
-     alt="Black mourning ribbon for websites, top left corner, ริบบิ้นไว้ทุกข์สีดำ มุมบนซ้าย สำหรับแสดงความอาลัยบนเว็บไซต์" 
-     style="position:fixed; top:0; left:0; width:80px; opacity:0.9; z-index:9999; pointer-events:none;">
 
     <nav>
-        <div class="logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yutthapol.C</div>
+        <div class="logo">YC.</div>
         <ul class="nav-links">
-            <li><a href="#home">หน้าหลัก</a></li>
-            <li><a href="#intro">คำนำ</a></li>
-            <li><a href="#bio">ประวัติส่วนตัว</a></li>
+            <li><a href="#hero">หน้าแรก</a></li>
+            <li><a href="#about">แนะนำตัว</a></li>
+            <li><a href="#profile">ประวัติส่วนตัว</a></li>
             <li><a href="#education">การศึกษา</a></li>
-            <li><a href="#work">การทำงาน</a></li>
+            <li><a href="#experience">ประสบการณ์</a></li>
             <li><a href="#portfolio">ผลงาน</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">ติดต่อ</a></li>
         </ul>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
-        </div>
     </nav>
 
-    <section id="home" class="hero">    
-        <div class="hero-content hidden slide-left">
-            <div class="holographic-container">
-                <div class="holographic-card">                 
-                    <a href="https://www.mnre.go.th/" class="btn-logo" ><img src="FRD.png" alt="Ministry of Natural Resources and Environment" class="dept-logo"></a>
-
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="holographic-card">
-                    <a href="https://www.forest.go.th/" class="btn-logo" ><img src="color-png.png" alt="Royal Forest Department" class="dept-logo"></a>
-                </div>
-            </div>
-            <h1>สวัสดีครับ <br><span class="highlight">ผม ยุทธพล จิตตสม</span></h1>
-            <p><span class="highlight-sub">ผู้สอบตำแหน่ง เจ้าพนักงานคอมพิวเตอร์</span></p>
-            
-            <a href="#contact" class="btn-primary">ช่องทางการติดต่อ</a>
-        </div>
-        <div class="hero-image hidden slide-right">
-            <div class="profile-frame">
-                <img src="IMG_4920.JPG" alt="Yuttapon Jittasom">
-            </div>
-        </div>
-        </p>
-    </section>
-
-    <section id="intro">
-        <div class="container">
-            <h2 class="hidden fade-up">คำนำ</h2>
-            <div class="content-grid">
-                <div class="text-box glass hidden slide-left">
-                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้าพเจ้าจัดทำขึ้นเว็บไซต์นี้เพื่อเป็นตัวแทนนำเสนอเอกสารข้อมูลเกี่ยวกับ
-                        ประวัติส่วนตัว ประวัติการศึกษา ความรู้ ความสามารถ ทักษะ และ ความสนใจพิเศษรวมทั้งเกียรติบัตร
-                        ตลอดจนพัฒนาการทางด้านต่างๆของข้าพเจ้า
-                        ข้าพเจ้าหวังว่าเว็บไซต์นี้จะทำให้ทุกท่านที่อ่านได้เห็นคุณค่าและความสามารถโดย
-                        รวมของข้าพเจ้า <br>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ปัจจุบัน เทคโนโลยีคือพันธมิตรที่สำคัญที่สุด ตั้งแต่การใช้ โดรน ติดตามการเปลี่ยนแปลงของป่า, การใช้ AI และภาพถ่ายดาวเทียม เพื่อตรวจจับการบุกรุกและไฟป่าแบบเรียลไทม์, ไปจนถึงการใช้ GIS และ Big Data เพื่อการบริหารจัดการทรัพยากรอย่างแม่นยำ<br>
-
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ข้าพเจ้าขอนำเสนอตัวเองในฐานะ "ผู้ขับเคลื่อนนวัตกรรม" ที่จะใช้ความรู้ด้านเทคโนโลยีเป็นสะพานเชื่อมระหว่างการอนุรักษ์ดั้งเดิม กับการบริหารจัดการป่าไม้อย่างชาญฉลาดและยั่งยืน</p>
-                </div>
-                <div class="img-box hidden slide-right">
-                    <img src="img/คำนำ.jpg" >
-                </div>
+    <section id="hero" class="fade-section">
+        <div class="hero-content"><br><br><br><br>
+            <img src="Yutthapol.gif" alt="Profile Picture" height="500">
             </div>
         </div>
     </section>
 
-    <section id="bio">
-        <div class="container">
-            <h2 class="hidden fade-up">ประวัติส่วนตัว</h2>
-            <div class="content-grid reverse">
-                <div class="text-box glass hidden slide-right">
-                    <h3>ข้อมูลสังเขป</h3>
-                    <ul class="info-list">
-                        <li><strong>ชื่อ-สกุล:</strong> นายยุทธพล จิตตสม</li>
-                        <li><strong>เกิดวันที่:</strong> 10 ตุลาคม พ.ศ.2535</li>
-                        <li><strong>อายุ:</strong> 33 ปี</li>
-                        <li><strong>ถิ่นกำเนิด:</strong> อำเภอสว่างแดนดิน จังหวัดสกลนคร</li>
-                        <li><strong>ศาสนา:</strong> พุทธ</li>
-                        <li><strong>สัญชาติ:</strong> ไทย</li>
-                        <li><strong>ความสนใจ:</strong> เทคโนโลยี, การอนุรักษ์ธรรมชาติ, การบริหารจัดการ</li>
-                        <li><strong>คติประจำใจ:</strong> ความสำเร็จเกิดจากการลงมือทำ</li>
-                        <li><strong>สามารถพิเศษ:</strong><br> <img height="50px" src="img/ico/HTML5.png" ><img height="50px" src="img/ico/css.png" ><img height="50px" src="img/ico/JavaScript.png" >
-                        <img height="50px" src="img/ico/Python.png" ><img height="50px" src="img/ico/Sql.png" ><img height="50px" src="img/ico/Microsoft_Word.png" ><img height="50px" src="img/ico/excel.png" ><img height="50px" src="img/ico/Gemini.png"><br>
-                        <img height="50px" src="img/ico/Flash cs5.png" ><img height="50px" src="img/ico/Photo shop.png" ></li>
-                    </ul>
-                </div>
-                <div class="img-box hidden slide-left">
-                    <img src="img/RUN.jpg" alt="Personal Lifestyle">
-                </div>
+    <section id="about" class="fade-section">
+        <div class="glass-card">
+            <h2>แนะนำตัว</h2>
+            <p>สวัสดีครับ ผม "โด" มีความมุ่งมั่นและสนใจในการพัฒนาเว็บไซต์ด้วย HTML5, CSS3, JavaScript และการจัดการข้อมูลผ่าน Google Apps Script รวมถึงมีความหลงใหลในงาน Graphic Design และการถ่ายภาพเป็นพิเศษ พร้อมเรียนรู้และพัฒนาทักษะใหม่ๆ อยู่เสมอ</p>
+        </div>
+    </section>
+
+    <section id="profile" class="fade-section">
+        <div class="glass-card">
+            <h2>ประวัติส่วนตัว</h2>
+            <div class="grid-2">
+                <ul>
+                    <li><strong>ชื่อ-สกุล:</strong> ยุทธพล จิตสม (โด)</li>
+                    <li><strong>วันเกิด:</strong> 10 ตุลาคม 2535 (อายุ 33 ปี)</li>
+                </ul>
+                <ul>
+                    <li><strong>ภูมิลำเนา:</strong> อ.สว่างแดนดิน จ.สกลนคร</li>
+                    <li><strong>ความสนใจ:</strong> วิ่งมาราธอน, แคมป์ปิ้ง, ถ่ายภาพ (Sony A7R V / Canon EOS R5)</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="education">
-        <div class="container">
-            <h2 class="hidden fade-up">ประวัติการศึกษา</h2>
+    <section id="education" class="fade-section">
+        <div class="glass-card">
+            <h2>ประวัติการศึกษา</h2>
             <div class="timeline">
-                <div class="timeline-item glass hidden fade-up">
-                    <div class="year">2562 - 2564</div>
-                    <h3>ระดับอนุปริญญา(ปวส.)</h3>
-                    <p>บริหารธุรกิจ สาขาคอมพิวเตอร์ธุรกิจ</p>
-                    <p>วิทยาลัยเทคโนโลยีเอ็น-เทคบริหารธุรกิจ</p>
+                <div class="timeline-item">
+                    <h3>ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)</h3>
+                    <p>สาขาคอมพิวเตอร์ธุรกิจ - วิทยาลัยเทคโนโลยีเอ็นเทคบริหารธุรกิจ</p>
                 </div>
-                <div class="timeline-item glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <div class="year">2552 - 2554</div>
-                    <h3>ระดับมัธยมศึกษาตอนปลาย</h3>
-                    <p>โรงเรียนแวงพิทยาคม</p>
-                    <p>สายวิทย์-คณิต</p>
+                <div class="timeline-item">
+                    <h3>มัธยมศึกษาตอนปลาย</h3>
+                    <p>สายวิทย์-คณิต - โรงเรียนแวงพิทยาคม</p>
                 </div>
-                <div class="timeline-item glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <div class="year">2550 - 2552</div>
-                    <h3>ระดับมัธยมศึกษาตอนต้น</h3>
-                    <p>โรงเรียนแวงพิทยาคม</p>
-                    <p>สาย-</p>
-                </div>
-            </div>
-             <div class="banner-img hidden fade-up">
-                <img src="img/natur.png" alt="Education Background">
             </div>
         </div>
     </section>
 
-    <section id="work">
-        <div class="container">
-            <h2 class="hidden fade-up">ประสบการณ์การทำงาน</h2>
+    <section id="experience" class="fade-section">
+        <div class="glass-card">
+            <h2>ประสบการณ์การทำงาน</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>พนักงานรักษาความปลอดภัย</h3>
+                    <p>ศาลจังหวัดสกลนคร (2568)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>ผู้บริหารแฟรนไชส์</h3>
+                    <p>J&T Express (2564 - 2568)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>เจ้าของกิจการร้านซ่อมคอมพิวเตอร์และมือถือ</h3>
+                    <p>ธุรกิจส่วนตัว (2560 - 2562)</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>ผู้จัดการสาขา / IT Sales</h3>
+                    <p>Advice IT และ MD Computer (2556 - 2557)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="training" class="fade-section">
+        <div class="glass-card">
+            <h2>การอบรม และความสำเร็จ</h2>
+            <ul>
+                <li>สอบขึ้นบัญชีอันดับ 2 ตำแหน่งนักวิชาการคอมพิวเตอร์ กรมป่าไม้ (มกราคม 2569)</li>
+                <li>การประยุกต์ใช้ AI และ Big Data สำหรับการจัดการทรัพยากรป่าไม้</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="portfolio" class="fade-section">
+        <div class="glass-card">
+            <h2>ผลงานที่โดดเด่น</h2>
             <div class="grid-3">
-                <div class="card glass hidden fade-up">
-                    <img src="img/work/IMG_5279.jpg" alt="Work 1">
-                    <h3>2568 เจ้าหน้าที่รักษาความปลอดภัย ศาลจังหวัดสกลนคร</h3>
-                    <p>สังกัดองค์การสงเคราะห์ทหารผ่านศึก ในพระบรมราชูปถัมภ์ ประจำศาลจังหวัดสกลนคร ดูแลความปลอดภัยภายในศาล และท่านผู้พิพากษา ฝึกทบทวนท่าบุคคลมือเปล่าทุกสัปดาห์</p>
+                <div class="portfolio-item">
+                    <h3>Web Development</h3>
+                    <p>ระบบฐานข้อมูลด้วย Google Sheets & Apps Script</p>
                 </div>
-                <div class="card glass hidden fade-up" style="transition-delay: 0.1s;">
-                    <img src="img/work/jt.jpg" alt="Work 2">
-                    <h3>2564-2568 กรรมการผู้บริหาร สาขา J&T Express(แฟรนไซส์)</h3>
-                    <p>จัดการระบบขนส่งของสาขาและฐานข้อมูล บริหารจัดการพนักงาน ไม่ว่าจะเป็น แอดมิน ธุรการ พนักงานส่งพัสดุ เป็นต้น เพื่อให้เป็นไปตามเป้าหมาย</p>
+                <div class="portfolio-item">
+                    <h3>Graphic Design</h3>
+                    <p>ออกแบบโลโก้ "YC" (Geometric Monogram) และ Infographic</p>
                 </div>
-                <div class="card glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <img src="img/work/JTW.jpg" alt="Work 3">
-                    <h3>2563 ฝึกงาน J&T Express</h3>
-                    <p>เรียนรู้การทำงานของโปรแกรมระบบขนส่งของบริษัท ระบบJTS ช่วยเหลือเจ้าหน้าที่อื่นๆ</p>
-                </div>
-                <div class="card glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <img src="img/work/mobile.jpg" alt="Work 3">
-                    <h3>2560-2562 เปิดร้านซ่อมโน๊ตบุ๊ค คอมพิวเตอร์และมือถือ</h3>
-                    <p>ซ่อมคอมพิวเตอร์ โน๊ตบุ๊ค และมือถือ จำหน่ายมือถือ</p>
-                </div>
-                <div class="card glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <img src="img/work/Advice1.jpg" alt="Work 3">
-                    <h3>2558-2559 ผู้จัดการสาขา Advice IT (โรบินสัน สกลนคร)</h3>
-                    <p>จัดการบริหารสต๊อคสินค้า พนักงาน ทำยอดขายให้ได้ตามเป้าที่รับมา ทำระบบเคลมสินค้า เช็คอาการอุปกรณ์คอมพิวเตอร์/คอมพิวเตอร์/อุปกรณ์Network/มือถือ เบื้องต้นก่อนส่งให้ช่าง</p>
-                </div>
-                <div class="card glass hidden fade-up" style="transition-delay: 0.2s;">
-                    <img src="img/work/md5.jpg" alt="Work 3">
-                    <h3>2556-2557 พนักงานขาย MDcomputer พันธุ์ทิพย์ ประตูน้ำ</h3>
-                    <p>ขายอุปกรณ์คอมพิวเตอร์ จัดสเปคคอมพิวเตอร์</p>
+                <div class="portfolio-item">
+                    <h3>Affiliate Marketing</h3>
+                    <p>ช่อง TikTok: เกาเหลาเส้นเล็กชาม</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio">
-        
-                <h2 class="hidden fade-up">ผลงานที่โดดเด่น</h2>
-                <h3 class="hidden fade-up">การผ่านการอบรม</h3>
-                <h4 class="hidden fade-up">สามารถเลื่อนเพื่อเลือกและกดเพื่อพลิกดูรายละเอียด</h4>
-
-        <div class="slider-wrapper hidden slide-left">
-        <div class="slider-track" id="track">
+    <section id="contact" class="fade-section">
+        <div class="glass-card">
+            <h2>ช่องทางการติดต่อ</h2>
+            <p><strong>เบอร์โทรศัพท์:</strong> 08X-XXX-XXXX</p>
+            <p><strong>อีเมล:</strong> example@email.com</p>
+            <p><strong>Line ID:</strong> yourlineid</p>
             
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (1).jpg" alt="Image 1">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร Basic Cybersecurity Lab</p>
-                            <p>โดย สำนักงานคณะกรรมการการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <hr style="margin: 30px 0; border: 0; border-top: 1px solid #bfdbfe;">
 
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (2).jpg" alt="Image 2">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร เทคโนโลยีสารสนเทศในยุคดิจิทัล | Information Technology in Digital Era </p>
-                            <p>โดย มหาวิทยาลัยวลัยลักษณ์</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (3).jpg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร ระบบเครือข่ายคอมพิวเตอร์ขั้นพื้นฐาน | Network Literacy </p>
-                            <p>โดย มหาวิทยาลัยเชียงใหม่</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (4).jpg" alt="Image 4">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร การสร้างหน้าเว็บเบื้องต้นด้วย HTML และ CSS</p>
-                            <p> โดย จุฬาลงกรณ์มหาวิทยาลัย</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (5).jpg" alt="Image 5">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร Microsoft 365 Copilot </p>
-                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (6).jpg" alt="Image 6">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับพื้นฐาน </p>
-                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (7).jpg" alt="Image 7">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร Microsoft AI Skills For All</p>
-                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ ร่วมกับ บริษัท ไมโครซอฟท์(ประเทศไทย) จำกัด</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (8).jpg" alt="Image 8">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรด้านความมั่นคงปลอดภัยไซเบอร์ระดับผู้เชี่ยวชาญ</p>
-                            <p>โดย สํานักงานคณะกรรมการรักษาความมั่นคงปลอดภัยไซเบอร์แห่งชาติ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (12).jpg" alt="Image 9">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรแอพพลิเคชั่นที่เกี่ยวข้องกับการดำเนินชีวิตประจำวัน</p>
-                        <p>โดย ศูนย์ส่งเสริมการเรียนรู้ระดับอำเภอบางบาล</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (15).jpg" alt="Image 10">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรทักษะการเรียนรู้ภาษาอังกฤษตามมาตรฐาน CEFR</p>
-                            <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Certificate (16).jpg" alt="Image 4">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรการพัฒนาสมรรถณะภาษาอังกฤษ</p>
-                            <p>โดย สำนักงานเขตพื้นที่การศึกษาประถามศึกษาราชบุรีเขต๑</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/Untitled design.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรบริการอย่างไรให้ลูกค้าพอใจสูงสุด</p>
-                            <p>โดย สมาคมส่งเสริมเทคโนโลยี(ไทย-ญี่ปุ่น)</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/IMG_5516.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรวิชาพนักงานรักษาความปลอดภัย</p>
-                            <p>โดย โรงเรียนรักษาความปลอดภัย องค์การสงเคราะห์ทหารผ่านศึก ในพระบรมราชูปถัมถ์</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/IMG_5515.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรด้านความปลอดภัย อาชีวอนามัย และสิ่งแวดล้อม ในการทำงาน</p>
-                            <p>โดย โรงเรียนรักษาความปลอดภัย องค์การสงเคราะห์ทหารผ่านศึก ในพระบรมราชูปถัมถ์</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/IMG_5517.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตร กระโดดหอ34ฟุต ทดสอบกำลังใจ</p>
-                            <p>โดย โรงเรียนรักษาความปลอดภัย องค์การสงเคราะห์ทหารผ่านศึกในพระบรมราชูปถัมถ์</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/IMG_5513.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรวิชาพนักงานรักษาความปลอดภัย</p>
-                            <p>โดย โรงเรียนรักษาความปลอดภัย องค์การสงเคราะห์ทหารผ่านศึก ในพระบรมราชูปถัมถ์</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="slide-item">
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="img/cert/IMG_5514.jpeg" alt="Image 3">
-                            <div class="hint">เลื่อนและกดเพื่อดูรายละเอียด</div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>หลักสูตรการCPR และการช่วยฟื้นคืนชีพขั้นพื้นฐาน BLS & AED</p>
-                            <p>โดย ศูนย์ส่งเสริมการเรียนรู้มรุสุวรรณ</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        </div>
-    
-        
-    <br><br><br><br><br>   
-            
-        <h3 class="hidden fade-up">การมีส่วนร่วมกิจกรรม</h3>
-        <div class="slider-container hidden slide-right">
-        <div class="slider-wrapper2">
-            <div class="slide2">
-                <img src="img/cert/Certificate (10).jpg" alt="Mountain View">
-                <div class="caption">รักษ์น้ำรักป่า</div>
-            </div>
-            <div class="slide2">
-                <img src="img/cert/Certificate (11).jpg" alt="Nature">
-                <div class="caption">เทคโนโลยี</div>
-            </div>
-            <div class="slide2">
-                <img src="img/cert/Certificate (13).jpg" alt="Ocean">
-                <div class="caption">บิดาแห่งฝนหลวง</div>
-            </div>
-            <div class="slide2">
-                <img src="img/cert/Certificate (14).jpg" alt="Ocean">
-                <div class="caption">วันวชิราวุธ</div>
-            </div>
-            
-        </div>
-
-        <button class="prev-btn" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next-btn" onclick="moveSlide(1)">&#10095;</button>
-
-        <div class="dots-container">
-            <span class="dot2" onclick="currentSlide(0)"></span>
-            <span class="dot2" onclick="currentSlide(1)"></span>
-            <span class="dot2" onclick="currentSlide(2)"></span>
-            <span class="dot2" onclick="currentSlide(2)"></span>
-        </div>
-        </div>
-        
-                
-
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <div class="contact-box glass hidden fade-up">
-                <div class="contact-info">
-                    <h3>ช่องทางการติดต่อ</h3>
-                    <p><i class="fas fa-phone"></i> 086-3045053</p>
-                    <p><i class="fas fa-envelope"></i> Flowstate.d.y@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> ศาลจังหวัดสกลนคร</p>
-                    <div class="holographic-container">
-                        <div class="holographic-card">                 
-                            <a href="https://facebook.com/sudt.c.ca.khiw.khwa.193835" ><img src="img/ico/Facebook_Logo_2023.png" alt="Ministry of Natural Resources and Environment" class="dept2-logo"></a>
-                        </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="holographic-card">
-                            <a href="https://line.me/ti/p/FenkZ6g2pt" ><img src="img/ico/LINE.png" alt="Royal Forest Department" class="dept2-logo"></a>
-                        </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="holographic-card">
-                            <a href="https://www.instagram.com/dodo_dlxvxp" ><img src="img/ico/Instagram_icon.png.webp" alt="Royal Forest Department" class="dept2-logo"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form   form name="submit-to-google-sheet">
-                        <input name="ชื่อ" type="text" placeholder="ชื่อ" required>
-                        <input name="เบอร์โทร" type="tel" placeholder="เบอร์โทร" required>
-                        <textarea name="ความคิดเห็น" rows="7" placeholder="ความคิดเห็น" required></textarea>
-                        <button type="submit" class="btn-primary">ส่งความคิดเห็น</button>
-                        <p id="msg" style="display:none; color: green; margin-top:10px;">ส่งข้อมูลเรียบร้อยแล้ว!</p>
-                    </form>
-                </div>
-            </div>
+            <h3>เสนอความคิดเห็น</h3>
+            <form action="#" class="contact-form">
+                <input type="text" placeholder="ชื่อของคุณ" required>
+                <input type="email" placeholder="อีเมล" required>
+                <textarea rows="4" placeholder="ข้อความ..." required></textarea>
+                <button type="submit">ส่งข้อมูล</button>
+            </form>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Yuttapon Jittasom. All Rights Reserved.</p>
+        <p>&copy; 2026 Yutthaphon Chittasom. All Rights Reserved.</p>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script src="Js/script.js"></script>
 </body>
 </html>
-
-
-
-
