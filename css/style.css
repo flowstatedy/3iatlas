@@ -207,6 +207,9 @@ h3 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: zoom-in;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 /* สำหรับส่วนการอบรม */
@@ -355,6 +358,38 @@ h3 {
     #training img { width: 100%; margin: 10px 0; }
 }
 
-@media (max-width: 480px) {
-    .grid-1 { column-count: 1; } /* มือถือจอเล็กให้เรียงแถวละ 1 รูป */
+/* --- Responsive Mobile --- */
+@media (max-width: 768px) {
+    nav { padding: 15px 20px; }
+    .menu-toggle { display: block; }
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        right: -100%;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        width: 250px;
+        height: 100vh;
+        padding: 20px;
+        transition: right 0.4s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+    }
+    .nav-links.active { right: 0; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .glass-card { padding: 25px; }
+    
+    /* ปรับเป็น Flexbox เพื่อแก้ปัญหารูปหายในแนวตั้ง */
+    .grid-1 { 
+        column-count: auto; /* ยกเลิกคำสั่งเดิม */
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .grid-1 img { 
+        width: 100%; 
+        margin-bottom: 0; 
+    }
+    
+    #training img { width: 100%; margin: 10px 0; }
 }
