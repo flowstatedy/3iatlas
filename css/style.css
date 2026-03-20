@@ -229,9 +229,64 @@ footer {
 }
 
 /* Responsive */
+/* --- ส่วน Responsive ที่ปรับปรุงใหม่ --- */
 @media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; }
-    .gradient-text { font-size: 2.5rem; }
-    nav { flex-direction: column; padding: 10px; }
-    .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+    /* 1. ปรับ Navigation ให้ดูสะอาดตาขึ้น */
+    nav { 
+        padding: 15px 20px; 
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links { 
+        gap: 15px; 
+        font-size: 0.9rem; /* ลดขนาดฟอนต์เมนูเล็กน้อย */
+    }
+
+    /* 2. ปรับตัวหนังสือ Hero ไม่ให้ใหญ่จนล้นจอ */
+    .gradient-text { 
+        font-size: 2.8rem; 
+        line-height: 1.2;
+    }
+
+    /* 3. ปรับรูป Profile ให้เล็กลงตามสัดส่วนจอ */
+    .profile-image-placeholder {
+        width: 180px;
+        height: 180px;
+        margin: 20px auto;
+    }
+
+    /* 4. จัด Layout จาก 2 คอลัมน์ เป็นแถวเดียว */
+    .grid-2 { 
+        grid-template-columns: 1fr; 
+        text-align: center; /* จัดกึ่งกลางเพื่อความสวยงามบนมือถือ */
+    }
+
+    /* 5. ปรับ Padding ของ Card และ Section ให้มีพื้นที่หายใจ */
+    section {
+        padding: 80px 15px 30px; /* ลด padding บน-ล่าง */
+    }
+
+    .glass-card {
+        padding: 25px 20px; /* ลด padding ด้านใน card */
+    }
+
+    h2 {
+        font-size: 1.6rem; /* ปรับหัวข้อให้เล็กลงเล็กน้อย */
+    }
+
+    /* 6. ปรับ Timeline ให้ไม่กินพื้นที่ซ้ายมากเกินไป */
+    .timeline {
+        padding-left: 15px;
+    }
+}
+
+/* เพิ่มเติมสำหรับมือถือที่หน้าจอเล็กมาก (Small Phones) */
+@media (max-width: 480px) {
+    .gradient-text { 
+        font-size: 2.2rem; 
+    }
+    .nav-links {
+        gap: 10px;
+    }
 }
