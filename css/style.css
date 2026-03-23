@@ -1,4 +1,15 @@
-/* Reset & Base Styles */
+/* กำหนดตัวแปรสี โทนฟ้าพาสเทลและน้ำเงินหรูหรา */
+:root {
+    --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    --primary-blue: #1e3a8a; /* สีน้ำเงินเข้มตัวอักษร */
+    --accent-blue: #3b82f6; /* สีฟ้าสดปุ่มกด */
+    --accent-hover: #2563eb;
+    --text-main: #334155;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,138 +17,187 @@
     font-family: 'Kanit', sans-serif;
 }
 
-:root {
-    --primary-pastel: #dbeafe; /* Light Blue */
-    --accent-blue: #60a5fa;   /* Soft Blue */
-    --dark-blue: #1e3a8a;     /* Deep Blue for text */
-    --glass: rgba(255, 255, 255, 0.7);
-}
-
 body {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    color: #334155;
+    background: var(--bg-gradient);
+    color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
-/* Navigation */
+/* === Navigation Bar === */
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 15px 5%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 600;
-    color: var(--dark-blue);
+    color: var(--primary-blue);
 }
 
 .nav-links {
-    display: flex;
     list-style: none;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: #475569;
-    margin-left: 20px;
-    font-weight: 400;
-    transition: 0.3s;
-}
-
-.nav-links li a:hover {
-    color: var(--accent-blue);
-}
-
-/* Sections */
-section {
-    padding: 100px 10% 60px;
-    min-height: 100vh;
-}
-
-.glass-card {
-    background: var(--glass);
-    padding: 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-}
-
-h2 {
-    color: var(--dark-blue);
-    margin-bottom: 25px;
-    font-weight: 600;
-    border-left: 5px solid var(--accent-blue);
-    padding-left: 15px;
-}
-
-/* Hero Section */
-#hero {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#hero img {
-    max-width: 100%;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-/* Grid for Profile */
-.grid-2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
 
-ul { list-style: none; }
-li { margin-bottom: 10px; }
-
-/* Timeline for Education & Experience */
-.timeline-item {
-    margin-bottom: 30px;
-    padding-left: 20px;
-    border-left: 2px solid var(--accent-blue);
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-blue);
+    font-weight: 400;
+    transition: color 0.3s ease;
 }
 
-/* Pinterest Style Portfolio */
-.grid-1 {
-    columns: 3 300px; /* สร้าง Column แบบ Pinterest */
-    column-gap: 20px;
+.nav-links a:hover {
+    color: var(--accent-blue);
 }
 
-.grid-1 img {
+/* === Layout Sections === */
+section {
+    padding: 120px 5% 60px; /* เว้นที่ให้ Navbar ด้านบน */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 900px;
     width: 100%;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    display: block; /* แก้ปัญหาช่องว่างใต้รูป */
-    transition: transform 0.3s ease;
+    box-shadow: var(--glass-shadow);
 }
 
-.grid-1 img:hover {
-    transform: scale(1.03);
+h2 {
+    text-align: center;
+    color: var(--primary-blue);
+    margin-bottom: 30px;
+    font-size: 2rem;
 }
 
-/* Training Section - Horizontal Scroll or Grid */
+h3 {
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+}
+
+h4 {
+    color: var(--text-main);
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+/* === Hero & Button === */
+.hero-content {
+    text-align: center;
+}
+
+/* จัดการรูปภาพไม่ให้โดนตัด (object-fit: contain) */
+.hero-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain; 
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.hero-action {
+    margin-top: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: var(--accent-blue);
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(109, 149, 212, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(6, 33, 77, 0.6);
+}
+
+/* === Grids & Lists === */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* === Timeline (ประวัติการศึกษา/การทำงาน) === */
+.timeline {
+    border-left: 3px solid #93c5fd;
+    padding-left: 25px;
+    margin-left: 10px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -35px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+/* === Training Images === */
 #training img {
-    border-radius: 10px;
-    margin: 10px;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain; /* ป้องกันรูปภาพโดนบีบหรือตัด */
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Contact Form */
+#training .glass-card {
+    text-align: center;
+}
+
+/* === Contact Form === */
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -145,42 +205,73 @@ li { margin-bottom: 10px; }
 }
 
 .contact-form input, .contact-form textarea {
-    padding: 12px;
-    border-radius: 10px;
+    width: 100%;
+    padding: 15px;
     border: 1px solid #bfdbfe;
+    border-radius: 12px;
     outline: none;
+    background: rgba(255,255,255,0.7);
+    color: var(--text-main);
+    transition: 0.3s;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: var(--accent-blue);
+    background: white;
 }
 
 .contact-form button {
-    background: var(--accent-blue);
+    padding: 15px;
+    background: var(--primary-blue);
     color: white;
-    padding: 12px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
+    font-size: 1.1rem;
     cursor: pointer;
-    font-weight: 600;
     transition: 0.3s;
 }
 
 .contact-form button:hover {
-    background: var(--dark-blue);
+    background: var(--accent-blue);
 }
 
-/* Animations */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--primary-blue);
+}
+
+/* === Animations === */
 .fade-section {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.fade-section.appear {
+.fade-section.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Responsive */
+/* === Mobile Responsive === */
 @media (max-width: 768px) {
-    .nav-links { display: none; } /* ซ่อนเมนูบนมือถือเพื่อความเรียบง่าย หรือทำ Hamburger เพิ่ม */
-    section { padding: 80px 5% 40px; }
-    .grid-1 { columns: 2 150px; }
+    nav {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+    .glass-card {
+        padding: 25px;
+    }
 }
