@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ผลงานของฉัน - Yutthaphon Chittasom</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           CSS: การตกแต่งและโทนสีตรงข้าม (Blue vs Orange)
+        ========================================= */
+        :root {
+            --bg-color: #0f172a; /* สีน้ำเงินเข้มมาก (Navy) */
+            --card-bg: #1e293b; /* สีน้ำเงินเทา */
+            --accent-color: #fb923c; /* สีส้มสว่าง (โทนตรงข้าม) */
+            --accent-hover: #f97316; /* สีส้มเข้ม */
+            --text-main: #f8fafc; /* สีขาวอมฟ้า */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        /* ส่วนหัวข้อเว็บ */
+        header {
+            text-align: center;
+            padding: 50px 20px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-shadow: 0 4px 10px rgba(251, 146, 60, 0.3);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-weight: 300;
+            color: #94a3b8;
+        }
+
+        /* ปุ่มกลับหน้าแรก */
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* =========================================
+           Grid แกลลอรี่ผลงาน (Responsive PC & Mobile)
+        ========================================= */
+        .gallery-container {
+            display: grid;
+            /* บน PC ให้โชว์คอลัมน์ละอย่างน้อย 250px หากพื้นที่เหลือจะเพิ่มคอลัมน์อัตโนมัติ */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 250px; /* ล็อคความสูงให้เท่ากันทุกรูป */
+            object-fit: cover; /* ครอปรูปส่วนเกินออก ไม่ให้รูปเบี้ยว */
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid var(--card-bg);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* เอฟเฟกต์เวลาเอาเมาส์ชี้ไปที่รูป */
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-color); /* กรอบเปลี่ยนเป็นสีส้ม */
+            box-shadow: 0 15px 30px rgba(251, 146, 60, 0.25);
+            z-index: 10;
+        }
+
+        /* =========================================
+           ระบบหน้าต่างขยายรูปภาพ (Lightbox Modal)
+        ========================================= */
+        .modal {
+            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.95); /* พื้นหลังสีน้ำเงินเข้มโปร่งแสง */
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(251, 146, 60, 0.4);
+            border: 2px solid var(--accent-color);
+            object-fit: contain; /* ให้รูปขยายเต็มที่โดยไม่โดนตัด */
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #94a3b8;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--accent-color);
+        }
+
+        /* =========================================
+           Mobile Responsive (ปรับสำหรับมือถือ)
+        ========================================= */
+        @media (max-width: 768px) {
+            .gallery-container {
+                /* บังคับให้มือถือแสดง 2 คอลัมน์ */
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 20px 15px;
+            }
+            .gallery-item {
+                height: 160px; /* ลดความสูงของรูปบนมือถือ */
+                border-radius: 8px;
+            }
+            .close-btn {
+                top: 10px;
+                right: 20px;
+                font-size: 40px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>แกลลอรี่ผลงาน</h1>
+        <p>รวบรวมผลงานการออกแบบและกราฟิก</p>
+        <a href="index.html" class="back-btn">&larr; กลับหน้าหลัก</a>
+    </header>
+
+    <main class="gallery-container">
+        <img src="img/port/123.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Untitled design.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Untitled design (1).jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/งาน1.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/SOFA.png" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/jaecoo1.jpg" alt="ผลงาน" class="gallery-item">                                      
+        <img src="img/port/Untitled design (2).jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/รับสมัครงาน.png" alt="ผลงาน" class="gallery-item">          
+        <img src="img/port/IMG_4687.JPG" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/IMG_4795.JPG" alt="ผลงาน" class="gallery-item"> 
+        <img src="img/port/IMG_4751.JPG" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/IMG_4794.JPG" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/IMG_4847.JPG" alt="ผลงาน" class="gallery-item"> 
+        <img src="img/port/IMG_4635.JPG" alt="ผลงาน" class="gallery-item">   
+        <img src="img/port/IMG_4636.JPG" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/IMG_4637.JPG" alt="ผลงาน" class="gallery-item"> 
+        <img src="img/port/oxygen suncreen.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/DNA.jpg" alt="ผลงาน" class="gallery-item">  
+        <img src="img/port/Gluta RiceMilk Soap.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Tamarind Centela Soap.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Gluta soap.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Tamarind Soap.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/promo.jpg" alt="ผลงาน" class="gallery-item"> 
+        <img src="img/port/review.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/rate2.jpg" alt="ผลงาน" class="gallery-item">    
+        <img src="img/port/logo11.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Blue and White Retro Vintage Football Club Badge Logo (1).png" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/Logo L.png" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/logo ban.jpg" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/New logo full.png" alt="ผลงาน" class="gallery-item">
+        <img src="img/port/logo1.png" alt="ผลงาน" class="gallery-item">
+    </main>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("expandedImg");
+            const closeBtn = document.querySelector(".close-btn");
+            const galleryItems = document.querySelectorAll(".gallery-item");
+
+            // 1. วนลูปเช็คว่ารูปไหนถูกคลิก
+            galleryItems.forEach(item => {
+                item.addEventListener("click", function() {
+                    modal.style.display = "flex"; // แสดงหน้าต่าง Modal
+                    modalImg.src = this.src; // ดึงรูปที่คลิกไปแสดงผลขนาดใหญ่
+                });
+            });
+
+            // 2. ปิดรูปเมื่อกดปุ่มกากบาท (X)
+            closeBtn.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+            // 3. ปิดรูปเมื่อคลิกที่พื้นที่ว่างสีดำรอบๆ รูปภาพ
+            modal.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+            
+            // 4. (เพิ่มเติม) ปิดรูปเมื่อกดปุ่ม ESC บนคีย์บอร์ด
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape" && modal.style.display === "flex") {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
