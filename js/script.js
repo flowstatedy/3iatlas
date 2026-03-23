@@ -1,72 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. ระบบ Hamburger Menu สำหรับมือถือ
-    const nav = document.querySelector('nav');
-    const navLinks = document.querySelector('.nav-links');
+document.addEventListener("DOMContentLoaded", () => {
     
-    const menuToggle = document.createElement('div');
-    menuToggle.className = 'menu-toggle';
-    menuToggle.innerHTML = '☰';
-    nav.insertBefore(menuToggle, navLinks);
+    // 1. ลูกเล่น Smooth Scrolling สำหรับเวลากดเมนูแล้วค่อยๆ เลื่อนลงมา
+    const navLinks = document.querySelectorAll('.nav-links a');
     
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.nav-links li a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
     });
 
-    // 2. ระบบ Scroll Reveal (ให้เนื้อหาค่อยๆ เฟดขึ้นมาตอนเลื่อนจอ)
+    // 2. ลูกเล่น Intersection Observer สำหรับแสดงแอนิเมชัน Fade-in เมื่อเลื่อนจอมาถึง (UX นิยมใช้)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // องค์ประกอบต้องโผล่มา 15% ถึงจะเริ่มแอนิเมชัน
+    };
+
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // ใส่คลาส .visible เพื่อให้ CSS แสดงผล (Fade In)
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                // พอแสดงแล้วให้เลิกจับตาดู เพื่อไม่ให้เปลืองทรัพยากร
+                observer.unobserve(entry.target); 
             }
         });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    document.querySelectorAll('.fade-section').forEach(section => {
+    // เลือกทุก section ที่มีคลาส .fade-section มาจับเข้าแอนิเมชัน
+    const fadeSections = document.querySelectorAll('.fade-section');
+    fadeSections.forEach(section => {
         observer.observe(section);
-    });
-
-    // 3. ระบบ Lightbox (คลิกเพื่อดูรูปภาพขนาดใหญ่เต็มจอ)
-    // สร้างโครงสร้าง Lightbox HTML ลงใน Body
-    const lightbox = document.createElement('div');
-    lightbox.id = 'lightbox';
-    lightbox.className = 'lightbox';
-    lightbox.innerHTML = `
-        <span class="lightbox-close">&times;</span>
-        <img id="lightbox-img" src="" alt="Zoomed Image">
-    `;
-    document.body.appendChild(lightbox);
-
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.lightbox-close');
-
-    // จับ Event การคลิกรูปภาพในหมวดผลงานและการอบรม
-    const galleryImages = document.querySelectorAll('.grid-1 img, #training img');
-    
-    galleryImages.forEach(img => {
-        img.addEventListener('click', () => {
-            lightboxImg.src = img.src; // ดึง src ของรูปที่คลิกมาใส่ใน Lightbox
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // ปิดการเลื่อนหน้าจอชั่วคราว
-        });
-    });
-
-    // ฟังก์ชันปิด Lightbox
-    const closeLightbox = () => {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto'; // เปิดการเลื่อนหน้าจอตามปกติ
-    };
-
-    closeBtn.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => {
-        if (e.target !== lightboxImg) {
-            closeLightbox();
-        }
     });
 });
