@@ -106,7 +106,35 @@ h4 {
 
 /* === Hero & Button === */
 .hero-content {
+    padding-top: 100px;
     text-align: center;
+}
+
+.hero-profile-img {
+    /* หลักการสำคัญ */
+    max-width: 100%;    /* รูปกว้างที่สุดได้เท่ากับความกว้างจอมือถือ/Container */
+    height: auto;       /* ปรับความสูงอัตโนมัติตามสัดส่วนรูปภาพ ไม่ให้รูปเบี้ยว */
+    
+    display: block;     /* กำหนดให้เป็น block เพื่อให้ใช้ margin center ได้ */
+    margin: 0 auto;     /* จัดกึ่งกลางซ้ายขวา */
+
+    /* ตั้งค่าเพิ่มเติมเพื่อให้ดูดีบนหน้าจอคอม */
+    max-height: 500px;  /* บนจอคอม จะไม่สูงเกิน 500px (เท่ากับค่าเดิมของคุณ) */
+    
+    /* เพิ่มลูกเล่นเล็กน้อย (ไม่จำเป็นต้องใส่ก็ได้ครับ) */
+    border-radius: 20px; /* ทำมุมโค้ง */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); /* เพิ่มเงา */
+    margin-bottom: 30px; /* เว้นระยะห่างจากปุ่มด้านล่าง */
+}
+
+/* (แนะนำเพิ่มเติม) 
+   จัดการรูปภาพในส่วนการอบรม (#training) ให้ Responsive ด้วย 
+*/
+#training .glass-card img {
+    max-width: 100%;
+    height: auto; /* ลบ height="430" ใน HTML ออกด้วยจะดีมากครับ */
+    margin-bottom: 15px;
+    border-radius: 10px;
 }
 
 /* จัดการรูปภาพไม่ให้โดนตัด (object-fit: contain) */
