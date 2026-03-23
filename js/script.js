@@ -1,27 +1,43 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // เลือกทุก section ที่มีคลาส fade-section
-    const fadeSections = document.querySelectorAll('.fade-section');
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Smooth Scroll for Navigation
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 
-    // ตั้งค่าตัวสังเกตการณ์ (Observer) เพื่อดูว่าเลื่อนจอมาถึงส่วนนั้นหรือยัง
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15 // ทำงานเมื่อเห็น element 15% ของหน้าจอ
+    // 2. Fade-in Animation on Scroll
+    const sections = document.querySelectorAll('.fade-section');
+    
+    const options = {
+        threshold: 0.15 // เริ่มแสดงผลเมื่อเนื้อหาโผล่มา 15%
     };
 
-    const sectionObserver = new IntersectionObserver(function(entries, observer) {
+    const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // ถ้าเลื่อนมาถึง ให้เพิ่มคลาส 'visible' เพื่อแสดงแอนิเมชัน Fade In
-                entry.target.classList.add('visible');
-                // เมื่อแสดงแล้ว ให้เลิกสังเกตการณ์เพื่อลดการใช้ทรัพยากรเครื่อง
-                observer.unobserve(entry.target);
+                entry.target.classList.add('appear');
             }
         });
-    }, observerOptions);
+    }, options);
 
-    // เริ่มสังเกตการณ์แต่ละ section
-    fadeSections.forEach(section => {
-        sectionObserver.observe(section);
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    // 3. ปรับขนาดรูปภาพใน Portfolio อัตโนมัติ (กันภาพตัด)
+    // สำหรับ Layout แบบ Pinterest รูปจะจัดเรียงตามความสูงจริงของไฟล์
+    const portfolioImages = document.querySelectorAll('#portfolio img');
+    portfolioImages.forEach(img => {
+        img.addEventListener('load', () => {
+            // Re-layout logic can be added here if using a library like Isotope
+            // But with CSS 'columns', it handles automatically.
+        });
     });
 });
