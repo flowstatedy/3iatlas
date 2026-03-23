@@ -1,43 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // 1. Smooth Scroll for Navigation
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            document.querySelector(targetId).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
 
-    // 2. Fade-in Animation on Scroll
-    const sections = document.querySelectorAll('.fade-section');
-    
-    const options = {
-        threshold: 0.15 // เริ่มแสดงผลเมื่อเนื้อหาโผล่มา 15%
+    // 1. ระบบ Scroll แอนิเมชันเมื่อเลื่อนหน้าจอ (Intersection Observer)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // แสดงผลเมื่อส่วนนั้นโผล่เข้ามาในจอ 10%
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('appear');
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // ให้แอนิเมชันเล่นแค่ครั้งเดียว
             }
         });
-    }, options);
+    }, observerOptions);
 
-    sections.forEach(section => {
+    const fadeSections = document.querySelectorAll('.fade-section');
+    fadeSections.forEach(section => {
         observer.observe(section);
     });
 
-    // 3. ปรับขนาดรูปภาพใน Portfolio อัตโนมัติ (กันภาพตัด)
-    // สำหรับ Layout แบบ Pinterest รูปจะจัดเรียงตามความสูงจริงของไฟล์
-    const portfolioImages = document.querySelectorAll('#portfolio img');
-    portfolioImages.forEach(img => {
-        img.addEventListener('load', () => {
-            // Re-layout logic can be added here if using a library like Isotope
-            // But with CSS 'columns', it handles automatically.
+    // 2. ระบบ Smooth Scrolling เวลากดเมนู Navbar
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // คำนวณระยะเผื่อความสูงของ Navbar
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight - 20;
+  
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
+
 });
