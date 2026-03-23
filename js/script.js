@@ -1,44 +1,27 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // 1. ลูกเล่น Smooth Scrolling สำหรับเวลากดเมนูแล้วค่อยๆ เลื่อนลงมา
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    navLinks.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
+document.addEventListener("DOMContentLoaded", function() {
+    // เลือกทุก section ที่มีคลาส fade-section
+    const fadeSections = document.querySelectorAll('.fade-section');
 
-    // 2. ลูกเล่น Intersection Observer สำหรับแสดงแอนิเมชัน Fade-in เมื่อเลื่อนจอมาถึง (UX นิยมใช้)
+    // ตั้งค่าตัวสังเกตการณ์ (Observer) เพื่อดูว่าเลื่อนจอมาถึงส่วนนั้นหรือยัง
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15 // องค์ประกอบต้องโผล่มา 15% ถึงจะเริ่มแอนิเมชัน
+        threshold: 0.15 // ทำงานเมื่อเห็น element 15% ของหน้าจอ
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const sectionObserver = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // ใส่คลาส .visible เพื่อให้ CSS แสดงผล (Fade In)
+                // ถ้าเลื่อนมาถึง ให้เพิ่มคลาส 'visible' เพื่อแสดงแอนิเมชัน Fade In
                 entry.target.classList.add('visible');
-                // พอแสดงแล้วให้เลิกจับตาดู เพื่อไม่ให้เปลืองทรัพยากร
-                observer.unobserve(entry.target); 
+                // เมื่อแสดงแล้ว ให้เลิกสังเกตการณ์เพื่อลดการใช้ทรัพยากรเครื่อง
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // เลือกทุก section ที่มีคลาส .fade-section มาจับเข้าแอนิเมชัน
-    const fadeSections = document.querySelectorAll('.fade-section');
+    // เริ่มสังเกตการณ์แต่ละ section
     fadeSections.forEach(section => {
-        observer.observe(section);
+        sectionObserver.observe(section);
     });
 });
