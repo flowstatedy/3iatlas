@@ -1,6 +1,4 @@
-/* =========================================
-   Reset & Base Styles
-========================================= */
+/* Reset & Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -8,262 +6,181 @@
     font-family: 'Kanit', sans-serif;
 }
 
-html {
-    scroll-behavior: smooth; /* เลื่อนหน้าเว็บแบบนุ่มนวล */
+:root {
+    --primary-pastel: #dbeafe; /* Light Blue */
+    --accent-blue: #60a5fa;   /* Soft Blue */
+    --dark-blue: #1e3a8a;     /* Deep Blue for text */
+    --glass: rgba(255, 255, 255, 0.7);
 }
 
 body {
-    /* พื้นหลังไล่สีโทนน้ำเงินพาสเทล */
-    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
-    color: #1e293b; /* สีตัวอักษรให้อ่านง่าย */
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    color: #334155;
     line-height: 1.6;
     overflow-x: hidden;
 }
 
-/* =========================================
-   Navigation Bar
-========================================= */
+/* Navigation */
 nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    position: fixed;
-    width: 100%;
-    top: 0;
+    padding: 1rem 5%;
     z-index: 1000;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
 }
 
 .logo {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #0284c7;
+    color: var(--dark-blue);
 }
 
 .nav-links {
-    list-style: none;
     display: flex;
-    gap: 20px;
+    list-style: none;
 }
 
-.nav-links a {
+.nav-links li a {
     text-decoration: none;
     color: #475569;
+    margin-left: 20px;
     font-weight: 400;
-    transition: color 0.3s ease;
+    transition: 0.3s;
 }
 
-.nav-links a:hover {
-    color: #0284c7;
+.nav-links li a:hover {
+    color: var(--accent-blue);
 }
 
-/* =========================================
-   Layout & Sections
-========================================= */
+/* Sections */
 section {
-    padding: 100px 5% 50px; /* เว้นที่ว่างให้ Nav bar */
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 100px 10% 60px;
+    min-height: 100vh;
 }
 
-.hero-content {
-    text-align: center;
-}
-
-.hero-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(2, 132, 199, 0.2);
-}
-
-/* Glassmorphism Card (การ์ดใสสไตล์กระจก) */
 .glass-card {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
+    background: var(--glass);
     padding: 40px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 h2 {
-    color: #0369a1;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-    border-bottom: 2px solid #7dd3fc;
-    display: inline-block;
-    padding-bottom: 5px;
+    color: var(--dark-blue);
+    margin-bottom: 25px;
+    font-weight: 600;
+    border-left: 5px solid var(--accent-blue);
+    padding-left: 15px;
 }
 
-h3 { color: #0284c7; margin-top: 15px; }
-h4 { color: #475569; font-weight: 400; margin-bottom: 10px; }
+/* Hero Section */
+#hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
-/* =========================================
-   Grids & Lists
-========================================= */
+#hero img {
+    max-width: 100%;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Grid for Profile */
 .grid-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-.grid-2 ul { list-style: none; }
-.grid-2 li { margin-bottom: 10px; }
-.grid-2 strong { color: #0284c7; }
+ul { list-style: none; }
+li { margin-bottom: 10px; }
 
-/* =========================================
-   Timeline (ประวัติการศึกษา/ทำงาน)
-========================================= */
-.timeline {
-    border-left: 3px solid #bae6fd;
-    margin-left: 20px;
-    padding-left: 20px;
-}
-
+/* Timeline for Education & Experience */
 .timeline-item {
-    position: relative;
     margin-bottom: 30px;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent-blue);
 }
 
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 5px;
-    width: 12px;
-    height: 12px;
-    background: #38bdf8;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px #e0f2fe;
+/* Pinterest Style Portfolio */
+.grid-1 {
+    columns: 3 300px; /* สร้าง Column แบบ Pinterest */
+    column-gap: 20px;
 }
 
-.timeline-item li {
-    margin-left: 20px;
-    margin-top: 5px;
-}
-
-/* =========================================
-   Images Gallery (ไม่ตัดรูป คงอัตราส่วนเดิม)
-========================================= */
-/* รูปภาพในส่วนผลงานและการอบรม */
-#training img, 
 .grid-1 img {
     width: 100%;
-    height: auto !important; /* บังคับให้ความสูงปรับอัตโนมัติตามความกว้าง เพื่อไม่ให้รูปเบี้ยว */
-    object-fit: contain; /* ป้องกันการตัดรูปภาพ (Crop) ให้แสดงเต็มใบ */
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    border-radius: 15px;
+    display: block; /* แก้ปัญหาช่องว่างใต้รูป */
     transition: transform 0.3s ease;
 }
 
-#training img:hover, 
 .grid-1 img:hover {
-    transform: scale(1.02); /* ขยายรูปนิดหน่อยเวลาเอาเมาส์ชี้ */
+    transform: scale(1.03);
 }
 
-/* Grid สำหรับหน้าผลงาน */
-.grid-1 {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    align-items: start;
+/* Training Section - Horizontal Scroll or Grid */
+#training img {
+    border-radius: 10px;
+    margin: 10px;
+    object-fit: cover;
 }
 
-/* =========================================
-   Contact Form
-========================================= */
+/* Contact Form */
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.contact-form input, 
-.contact-form textarea {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #bae6fd;
+.contact-form input, .contact-form textarea {
+    padding: 12px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    font-family: 'Kanit', sans-serif;
+    border: 1px solid #bfdbfe;
     outline: none;
-    transition: border-color 0.3s;
-}
-
-.contact-form input:focus, 
-.contact-form textarea:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
 }
 
 .contact-form button {
-    padding: 12px 20px;
-    background: #0284c7;
+    background: var(--accent-blue);
     color: white;
+    padding: 12px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 1rem;
-    font-family: 'Kanit', sans-serif;
-    transition: background 0.3s ease;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 .contact-form button:hover {
-    background: #0369a1;
+    background: var(--dark-blue);
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #64748b;
-    font-size: 0.9rem;
-}
-
-/* =========================================
-   Animations (Fade in effect)
-========================================= */
+/* Animations */
 .fade-section {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.fade-section.visible {
+.fade-section.appear {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* =========================================
-   Mobile Responsiveness (หน้าจอมือถือ)
-========================================= */
+/* Responsive */
 @media (max-width: 768px) {
-    .nav-links {
-        display: flex;
-        overflow-x: auto; /* ให้เลื่อนซ้ายขวาได้บนมือถือถ้าเมนูยาวไป */
-        padding-bottom: 5px;
-        white-space: nowrap;
-    }
-    
-    /* ซ่อน Scrollbar ของเมนูในมือถือ */
-    .nav-links::-webkit-scrollbar { display: none; }
-    
-    nav {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px 5%;
-    }
-
-    .grid-2 {
-        grid-template-columns: 1fr; /* ปรับเป็น 1 คอลัมน์บนมือถือ */
-    }
-
-    .glass-card {
-        padding: 20px; /* ลดระยะขอบในมือถือ */
-    }
+    .nav-links { display: none; } /* ซ่อนเมนูบนมือถือเพื่อความเรียบง่าย หรือทำ Hamburger เพิ่ม */
+    section { padding: 80px 5% 40px; }
+    .grid-1 { columns: 2 150px; }
 }
