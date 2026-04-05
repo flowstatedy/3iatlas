@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ผลงานของฉัน - Yutthaphon Chittasom</title>
+    <title>ผลงานของฉัน - แกลลอรี่</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
         /* =========================================
-           CSS: การตกแต่งและโทนสีตรงข้าม (Blue vs Orange)
+           ตั้งค่าสีและรูปแบบพื้นฐาน
         ========================================= */
         :root {
-            --bg-color: #0f172a; /* สีน้ำเงินเข้มมาก (Navy) */
-            --card-bg: #1e293b; /* สีน้ำเงินเทา */
-            --accent-color: #fb923c; /* สีส้มสว่าง (โทนตรงข้าม) */
-            --accent-hover: #f97316; /* สีส้มเข้ม */
-            --text-main: #f8fafc; /* สีขาวอมฟ้า */
+            --bg-color: #0f172a; /* พื้นหลังสีน้ำเงินเข้ม */
+            --card-bg: #1e293b; /* พื้นหลังการ์ด */
+            --accent-color: #fb923c; /* สีส้มไฮไลท์ */
+            --text-main: #f8fafc; /* สีข้อความหลัก */
+            --text-muted: #94a3b8; /* สีข้อความรอง */
         }
 
         * {
@@ -28,37 +28,36 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* ส่วนหัวข้อเว็บ */
+        /* =========================================
+           ส่วนหัว (Header) และ ปุ่มกลับหน้าแรก
+        ========================================= */
         header {
             text-align: center;
-            padding: 50px 20px 20px;
+            padding: 50px 20px 30px;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 30px;
         }
 
         header h1 {
             font-size: 2.5rem;
             color: var(--accent-color);
-            text-shadow: 0 4px 10px rgba(251, 146, 60, 0.3);
             margin-bottom: 10px;
         }
 
-        header p {
-            font-weight: 300;
-            color: #94a3b8;
-        }
-
-        /* ปุ่มกลับหน้าแรก */
         .back-btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 25px;
+            margin-top: 15px;
+            padding: 8px 25px;
             background-color: transparent;
             color: var(--accent-color);
             border: 2px solid var(--accent-color);
             border-radius: 30px;
             text-decoration: none;
             transition: 0.3s;
+            font-weight: 600;
         }
 
         .back-btn:hover {
@@ -67,105 +66,89 @@
         }
 
         /* =========================================
-           Grid แกลลอรี่ผลงาน (Responsive PC & Mobile)
+           เลย์เอาต์ผลงาน (รูป 1 ฝั่ง + ข้อความ 1 ฝั่ง)
         ========================================= */
-        .gallery-container {
-            display: grid;
-            /* บน PC ให้โชว์คอลัมน์ละอย่างน้อย 250px หากพื้นที่เหลือจะเพิ่มคอลัมน์อัตโนมัติ */
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 40px 5%;
-            max-width: 1400px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 20px 50px;
         }
 
-        .gallery-item {
-            width: 100%;
-            height: 250px; /* ล็อคความสูงให้เท่ากันทุกรูป */
-            object-fit: cover; /* ครอปรูปส่วนเกินออก ไม่ให้รูปเบี้ยว */
+        .category-title {
+            font-size: 1.8rem;
+            color: #fff;
+            margin: 40px 0 20px;
+            padding-left: 15px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .portfolio-row {
+            display: flex;
+            background-color: var(--card-bg);
             border-radius: 12px;
-            cursor: pointer;
-            border: 2px solid var(--card-bg);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
         }
 
-        /* เอฟเฟกต์เวลาเอาเมาส์ชี้ไปที่รูป */
-        .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--accent-color); /* กรอบเปลี่ยนเป็นสีส้ม */
-            box-shadow: 0 15px 30px rgba(251, 146, 60, 0.25);
-            z-index: 10;
+        .media-container {
+            flex: 1; /* ให้รูปกินพื้นที่ครึ่งนึง */
+            max-width: 50%;
         }
 
-        /* =========================================
-           ระบบหน้าต่างขยายรูปภาพ (Lightbox Modal)
-        ========================================= */
-        .modal {
-            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
+        .media-container img, 
+        .media-container video {
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.95); /* พื้นหลังสีน้ำเงินเข้มโปร่งแสง */
-            backdrop-filter: blur(8px);
-            align-items: center;
+            object-fit: cover;
+            display: block;
+        }
+
+        .info-container {
+            flex: 1; /* ให้ข้อความกินพื้นที่ครึ่งนึง */
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
         }
 
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 40px rgba(251, 146, 60, 0.4);
-            border: 2px solid var(--accent-color);
-            object-fit: contain; /* ให้รูปขยายเต็มที่โดยไม่โดนตัด */
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #94a3b8;
-            font-size: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .close-btn:hover {
+        .info-container h3 {
             color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-container p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .info-container ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        .info-container strong {
+            color: #fff;
         }
 
         /* =========================================
-           Mobile Responsive (ปรับสำหรับมือถือ)
+           Mobile Responsive (สำหรับมือถือ)
         ========================================= */
         @media (max-width: 768px) {
-            .gallery-container {
-                /* บังคับให้มือถือแสดง 2 คอลัมน์ */
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                padding: 20px 15px;
+            .portfolio-row {
+                flex-direction: column; /* เปลี่ยนเป็นแนวตั้ง เรียงบนลงล่าง */
             }
-            .gallery-item {
-                height: 160px; /* ลดความสูงของรูปบนมือถือ */
-                border-radius: 8px;
+
+            .media-container {
+                max-width: 100%;
+                height: 250px; /* จำกัดความสูงรูปบนมือถือ */
             }
-            .close-btn {
-                top: 10px;
-                right: 20px;
-                font-size: 40px;
-            }
-            header h1 {
-                font-size: 2rem;
+
+            .info-container {
+                padding: 20px;
             }
         }
     </style>
@@ -174,84 +157,136 @@
 
     <header>
         <h1>แกลลอรี่ผลงาน</h1>
-        <p>รวบรวมผลงานการออกแบบและกราฟิก</p>
+        <p>ผลงานการออกแบบกราฟิกและสื่อมีเดีย</p>
         <a href="index.html" class="back-btn">&larr; กลับหน้าหลัก</a>
     </header>
 
-    <main class="gallery-container">
-        <img src="img/port/123.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Untitled design.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Untitled design (1).jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/งาน1.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/SOFA.png" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/jaecoo1.jpg" alt="ผลงาน" class="gallery-item">                                      
-        <img src="img/port/Untitled design (2).jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/รับสมัครงาน.png" alt="ผลงาน" class="gallery-item">          
-        <img src="img/port/IMG_4687.JPG" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/IMG_4795.JPG" alt="ผลงาน" class="gallery-item"> 
-        <img src="img/port/IMG_4751.JPG" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/IMG_4794.JPG" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/IMG_4847.JPG" alt="ผลงาน" class="gallery-item"> 
-        <img src="img/port/IMG_4635.JPG" alt="ผลงาน" class="gallery-item">   
-        <img src="img/port/IMG_4636.JPG" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/IMG_4637.JPG" alt="ผลงาน" class="gallery-item"> 
-        <img src="img/port/oxygen suncreen.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/DNA.jpg" alt="ผลงาน" class="gallery-item">  
-        <img src="img/port/Gluta RiceMilk Soap.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Tamarind Centela Soap.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Gluta soap.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Tamarind Soap.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/promo.jpg" alt="ผลงาน" class="gallery-item"> 
-        <img src="img/port/review.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/rate2.jpg" alt="ผลงาน" class="gallery-item">    
-        <img src="img/port/logo11.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Blue and White Retro Vintage Football Club Badge Logo (1).png" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/Logo L.png" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/logo ban.jpg" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/New logo full.png" alt="ผลงาน" class="gallery-item">
-        <img src="img/port/logo1.png" alt="ผลงาน" class="gallery-item">
-    </main>
+    <div class="container">
 
-    <div id="imageModal" class="modal">
-        <span class="close-btn">&times;</span>
-        <img class="modal-content" id="expandedImg">
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("expandedImg");
-            const closeBtn = document.querySelector(".close-btn");
-            const galleryItems = document.querySelectorAll(".gallery-item");
-
-            // 1. วนลูปเช็คว่ารูปไหนถูกคลิก
-            galleryItems.forEach(item => {
-                item.addEventListener("click", function() {
-                    modal.style.display = "flex"; // แสดงหน้าต่าง Modal
-                    modalImg.src = this.src; // ดึงรูปที่คลิกไปแสดงผลขนาดใหญ่
-                });
-            });
-
-            // 2. ปิดรูปเมื่อกดปุ่มกากบาท (X)
-            closeBtn.addEventListener("click", function() {
-                modal.style.display = "none";
-            });
-
-            // 3. ปิดรูปเมื่อคลิกที่พื้นที่ว่างสีดำรอบๆ รูปภาพ
-            modal.addEventListener("click", function(event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
+        <h2 class="category-title">ภาพโปรโมท</h2>
+        
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/kubota.jpg" alt="ภาพโปรโมทวันสงกรานต์">
+            </div>
+            <div class="info-container">
+                <h3>แคมเปญสงกรานต์: นวัตกรรมคู่วัฒนธรรม</h3>
+                <p><strong>1. โทนสี (Color Palette)</strong><br>
+                   เน้นความสดใสและสื่อถึงเอกลักษณ์ของแบรนด์ไปพร้อมกับบรรยากาศเทศกาล:</p>
+                <ul>
+                    <li><strong>สีหลัก:</strong> สีส้ม</li>
+                    <li><strong>สีรอง:</strong> สีเขียวและสีน้ำตาลโทนอุ่น</li>
+                    <li><strong>สีไฮไลท์:</strong> สีฟ้า/น้ำเงิน, สีเหลืองทอง</li>
+                </ul>
+                <p><strong>2. การจัดองค์ประกอบ (Layout)</strong><br>
+                   เน้นความสมดุลและการเล่าเรื่องแบบเป็นลำดับ (Visual Hierarchy) โดยมี <strong>จุดโฟกัส</strong> คือ รถแทรกเตอร์ถูกวางไว้กึ่งกลางภาพในฐานะ "พระเอก" ของงาน ตกแต่งด้วยพวงมาลัยเพื่อเชื่อมโยงเครื่องจักรเข้ากับประเพณี</p>
+                <p><strong>3. การเลือกใช้ Font (Typography)</strong><br>
+                   ใช้ฟอนต์ภาษาไทยแบบไม่มีหัว (Modern Sans-serif) ที่มีความโค้งมน (Rounded) ให้ความรู้สึกที่เป็นมิตร สนุกสนาน และดูร่วมสมัย</p>
+                <p><strong>สรุปแนวคิด:</strong> เป็นการผสมผสานระหว่าง "นวัตกรรม (รถแทรกเตอร์)" กับ "วัฒนธรรม (สงกรานต์)" โดยใช้สีส้มของแบรนด์เป็นตัวเชื่อมโยง มุ่งเน้นไปที่ความรู้สึกมีความสุข ความเป็นสิริมงคล และความผูกพันกับเกษตรกรไทยครับ</p>
+            </div>
             
-            // 4. (เพิ่มเติม) ปิดรูปเมื่อกดปุ่ม ESC บนคีย์บอร์ด
-            document.addEventListener('keydown', function(event) {
-                if (event.key === "Escape" && modal.style.display === "flex") {
-                    modal.style.display = "none";
-                }
-            });
-        });
-    </script>
+        </div>
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/jaecoo1.jpg" alt="ภาพโปสเตอร์โปรโมท JAECOO 6 EV">
+            </div>
+            <div class="info-container">
+                <h3>ภาพโปสเตอร์โปรโมท JAECOO 6 EV</h3>
+                <p><strong>1. โทนสี (Color Palette)</strong><br>
+                   การใช้สีในงานนี้เน้นอารมณ์ความล้ำสมัย (Futuristic) และความพรีเมียมที่เป็นมิตรต่อสิ่งแวดล้อม (EV Concept):</p>
+                <ul>
+                    <li><strong>สีหลัก:</strong> สีน้ำเงินเข้ม/กรมท่า (Midnight Blue) </li>
+                    <li><strong>สีรอง:</strong> สีขาว (White) และ สีเงิน (Silver) </li>
+                    <li><strong>สีไฮไลท์:</strong> สีฟ้าสว่าง/ไซแอน (Electric Cyan/Light Blue)</li>
+                </ul>
+                <p><strong>2. การจัดองค์ประกอบ (Layout)</strong><br>
+                   การจัดวางเน้นความสมดุลแบบกึ่งกลาง (Symmetrical Balance) เพื่อสร้างความรู้สึกมั่นคงและน่าเชื่อถือ <strong>Visual Hierarchy (ลำดับการมอง): </strong> 1. Price: ตัวเลข "999,000" มีขนาดใหญ่ที่สุดและอยู่กลางภาพ เพื่อดึงดูดสายตาทันที (Hook) 2. Product: ตัวรถถูกวางในมุมเฉียง (Perspective) เพื่อให้เห็นดีไซน์ "One Box Style" ชัดเจน และมี Motion Blur ที่ล้อสื่อถึงการเคลื่อนที่ 3. Headline: ชื่อรุ่น JAECOO 6 EV วางด้านบนเพื่อระบุตัวตน
+                    <strong>Depth (ระยะของภาพ): </strong> มีการแบ่ง Foreground (ถนน), Midground (ตัวรถและราคา), และ Background (ตึกระฟ้า) ทำให้ภาพดูมีมิติ ไม่แบน</p>
+                <p><strong>3. การเลือกใช้ Font (Typography)</strong><br>
+                   การเลือกใช้ฟอนต์สื่อถึงบุคลิกของแบรนด์ที่เป็นรถยนต์ไฟฟ้าคนรุ่นใหม่</p>
+                <p><strong>สรุปแนวคิด:</strong> งานออกแบบนี้ใช้แนวคิด "Modern Tech & Urban Adventure" โดยใช้โทนสีเย็นตัดกับแสงสว่างเพื่อสื่อถึงพลังงานไฟฟ้า และใช้ Layout ที่เน้นตัวเลขราคาและรูปลักษณ์รถที่ชัดเจน เพื่อกระตุ้นการตัดสินใจของผู้บริโภคครับ</p>
+            </div>
+            
+        </div>
+
+        <h2 class="category-title">ภาพโฆษณา</h2>
+        
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/Untitled design (2).jpg" alt="ภาพโฆษณา Mitsubishi Outlander PHEV ">
+            </div>
+            <div class="info-container">
+                <h3>ภาพโฆษณา Mitsubishi Outlander PHEV </h3>
+                <p><strong>1. โทนสี (Color Palette)</strong><br></p>
+                <ul>
+                    <li><strong>สีหลัก:</strong> สีขาว (White Diamond) สีเขียว (Green)  </li>
+                    <li><strong>สีรอง:</strong> สีน้ำเงินเข้ม/ดำ (Deep Navy/Black) </li>
+                    <li><strong>สีไฮไลท์:</strong> สีฟ้าไซแอน (Electric Cyan)</li>
+                </ul>
+                <p><strong>สรุปแนวคิด:</strong>  Outlander ไม่ใช่แค่รถ SUV ทั่วไป แต่เป็นนวัตกรรมที่อยู่ร่วมกับธรรมชาติได้อย่างหรูหรา เป็นการผสมผสานระหว่าง "ธรรมชาติ" กับ "เทคโนโลยี" ได้อย่างลงตัว </p>
+            </div>
+            
+        </div>
+
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/123.jpg" alt="ภาพโฆษณา">
+            </div>
+            <div class="info-container">
+                <h3>ภาพโฆษณาเก้าอี้ "Nature's Embrace Chair" </h3>
+                <p><strong>1. โทนสี (Color Palette)</strong><br></p>
+                <ul>
+                    <li><strong>สีหลัก:</strong> สีครีม  </li>
+                    <li><strong>สีรอง:</strong> สีน้ำตาลไม้  </li>
+                    <li><strong>สีไฮไลท์:</strong> สีเขียวมรกต </li>
+                </ul>
+                <p><strong>สรุปแนวคิด:</strong> เป็นการนำเสนอแนวคิดการออกแบบที่เน้นความสอดประสานระหว่างมนุษย์ ธรรมชาติ และพื้นที่อยู่อาศัย (Biophilic Design) </p>
+            </div>
+        </div>
+
+        <h2 class="category-title">ภาพประกาศ</h2>
+        
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/รับสมัครงาน.png" alt="ภาพประกาศรับสมัครงาน">
+            </div>
+            <div class="info-container">
+                <h3>ออกแบบภาพประกาศรับสมัครงาน</h3>
+                <p>ดีไซน์ที่ดูเป็นมืออาชีพ มีความน่าเชื่อถือ จัดลำดับความสำคัญของข้อความ (คุณสมบัติ, ตำแหน่ง, ช่องทางการติดต่อ) ให้ผู้สนใจอ่านจับใจความได้รวดเร็ว</p>
+            </div>
+        </div>
+
+        <h2 class="category-title">ออกแบบโลโก้</h2>
+        
+        <div class="portfolio-row">
+            <div class="media-container">
+                <img src="img/port/New logo full.png" alt="ออกแบบโลโก้">
+            </div>
+            <div class="info-container">
+                <h3>Corporate Identity Design</h3>
+                <p>ออกแบบตราสัญลักษณ์ที่สะท้อนถึงวิสัยทัศน์และตัวตนของแบรนด์ เน้นความเรียบง่าย (Minimalist) แต่เป็นที่จดจำได้ง่าย (Memorable) นำไปปรับใช้ได้กับทุกสื่อสิ่งพิมพ์และดิจิทัล</p>
+            </div>
+        </div>
+
+        <h2 class="category-title">สื่อมีเดีย</h2>
+        
+        <div class="portfolio-row">
+            <div class="media-container">
+                <iframe src="https://drive.google.com/file/d/15hPdoA0lHw3VKjp4JKHy4RlAQ8JtWLNZ/preview" width="400" height="480"></iframe>
+            </div>
+            <div class="info-container">
+                <h3>วิดีโอพรีเซนเทชัน / โฆษณาสั้น</h3>
+                <p><strong>รายละเอียดงาน:</strong></p>
+                <ul>
+                    <li>ตัดต่อวิดีโอสำหรับลง Social Media (Reels/TikTok)</li>
+                    <li>ใส่ Motion Graphic ข้อความประกอบและ Subtitle</li>
+                    <li>ย้อมสีวิดีโอ (Color Grading) ให้คุมโทนแบรนด์</li>
+                </ul>
+                <p>วิดีโอเน้นจังหวะกระชับ ดึงดูดความสนใจผู้ชมภายใน 3 วินาทีแรก</p>
+            </div>
+        </div>
+
+    </div>
 
 </body>
 </html>
