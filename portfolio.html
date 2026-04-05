@@ -144,7 +144,13 @@
 
             .media-container {
                 max-width: 100%;
-                height: 250px; /* จำกัดความสูงรูปบนมือถือ */
+                height: auto; /* แก้ไข: ให้ความสูงปรับตามอัตราส่วนของรูปภาพอัตโนมัติ */
+            }
+
+            .media-container img, 
+            .media-container video {
+                height: auto; /* แก้ไข: ยกเลิกการบังคับความสูง 100% เพื่อให้รูปไม่โดนยืดหรือครอป */
+                object-fit: contain; /* แก้ไข: เพื่อให้รูปแสดงเต็มใบ */
             }
 
             .info-container {
